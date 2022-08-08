@@ -18,7 +18,7 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def prime_factors(num: int) -> list:
+def prime_factors_old(num: int) -> list:
     """
     Assume n is a positive natural number
 
@@ -30,6 +30,40 @@ def prime_factors(num: int) -> list:
     return output
 
 
-# if __name__ == "__main__":
-# two = prime_factors(13195)
-# print(two[-1])
+def prime_factors(num: int) -> list:
+    """
+    Assume n is a positive natural number
+
+        returns a list of prime factors of n
+    """
+    if is_prime(num):
+        return [num]
+    if num == 1:
+        return []
+
+    output = []
+    prime_factor = 2
+
+    while True:
+        if num == prime_factor:
+            output.append(prime_factor)
+            break
+
+        while num % prime_factor == 0:
+            output.append(prime_factor)
+            num = num / prime_factor
+
+        prime_factor += 1
+
+        while is_prime(prime_factor) is False:
+            prime_factor += 1
+
+        if prime_factor > num:
+            break
+
+    return output
+
+
+if __name__ == "__main__":
+    print("two")
+    print(prime_factors(2), type(prime_factors(2)))

@@ -29,3 +29,10 @@ def test_problem_four():
     actual = firstten.problem_four(2)
     expected = 9009
     assert actual == expected
+
+
+def test_problem_five():
+    """test for problem five"""
+    actual = firstten.problem_five(10)
+    expected = 2520
+    assert actual == expected

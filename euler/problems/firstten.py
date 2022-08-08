@@ -59,7 +59,30 @@ def problem_four(num):
     return output
 
 
-if __name__ == "__main__":
-    problem_four(2)
-    # answer = problem_four(9009)
-    # print(f"Number: {answer}")
+def problem_five(num: int):
+    """
+    2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+    What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+    """
+
+    factors = [prime.prime_factors(i) for i in range(1, num + 1)]
+    used = []
+    output = []
+
+    for i in reversed(factors):
+        if len(i) > 1 and len(set(i)) == 1:
+            for y in i:
+                if y not in used:
+                    output.append(y)
+            used.append(i[1])
+
+        if len(i) == 1 and i[0] not in used:
+            output.append(i[0])
+
+    return math.prod(output)
+
+
+# if __name__ == "__main__":
+#     test = problem_five(20)
+#     print(test)
+# print(2 * 2 * 2 * 5 * 7 * 3 * 3)
