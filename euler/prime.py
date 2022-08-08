@@ -2,29 +2,31 @@
 import math
 
 
-def is_prime(n: int) -> bool:
+def is_prime(num: int) -> bool:
     """
     Assume n is a positive natural number
 
         returns True/False of prime
     """
-    if n == 1:
+    if num == 1:
         return False
     i = 2
-    while i * i <= n:
-        if n % i == 0:
+    while i * i <= num:
+        if num % i == 0:
             return False
         i += 1
     return True
 
 
-def prime_factors(n: int) -> list:
+def prime_factors(num: int) -> list:
     """
     Assume n is a positive natural number
 
         returns a list of prime factors of n
     """
-    output = [i for i in range(2, int(math.sqrt(n) + 1)) if is_prime(i) and n % i == 0]
+    output = [
+        i for i in range(2, int(math.sqrt(num) + 1)) if is_prime(i) and num % i == 0
+    ]
     return output
 
 

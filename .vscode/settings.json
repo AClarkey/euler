@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "c:\\Anaconda\\poetry\\virtualenvs\\euler-t_19msRL-py3.9\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\GGPC\\AppData\\Local\\pypoetry\\Cache\\virtualenvs\\euler-_dKvgk_D-py3.10\\Scripts\\python.exe",
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
