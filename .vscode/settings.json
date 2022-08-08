@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "c:\\Anaconda\\poetry\\virtualenvs\\euler-t_19msRL-py3.9\\Scripts\\python.exe",
+    "python.formatting.provider": "black",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "editor.formatOnSave": true
+}
