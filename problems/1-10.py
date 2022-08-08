@@ -36,8 +36,10 @@ def problem_three(n):
     The prime factors of 13195 are 5, 7, 13 and 29.
     What is the largest prime factor of the number 600851475143?
     """
+    output = prime.prime_factors(n)
+    return output[-1]
 
 
 if __name__ == "__main__":
-    two = problem_two(4000000)
-    print(f"Total: {two}")
+    three = problem_three(600851475143)
+    print(f"Number: {three}")
