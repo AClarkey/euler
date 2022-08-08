@@ -1,5 +1,4 @@
 """Prime number related helper functions"""
-import math
 
 
 def is_prime(num: int) -> bool:
@@ -16,18 +15,6 @@ def is_prime(num: int) -> bool:
             return False
         i += 1
     return True
-
-
-def prime_factors_old(num: int) -> list:
-    """
-    Assume n is a positive natural number
-
-        returns a list of prime factors of n
-    """
-    output = [
-        i for i in range(2, int(math.sqrt(num) + 1)) if is_prime(i) and num % i == 0
-    ]
-    return output
 
 
 def prime_factors(num: int) -> list:

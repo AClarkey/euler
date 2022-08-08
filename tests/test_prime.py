@@ -30,13 +30,6 @@ def test_is_prime():
     assert actual == expected
 
 
-def test_prime_factors_old():
-    """testing test_prime_factors function"""
-    actual = prime.prime_factors_old(13195)
-    expected = [5, 7, 13, 29]
-    assert actual == expected
-
-
 def test_prime_factors():
     """testing test_prime_factors function"""
     actual = prime.prime_factors(13195)

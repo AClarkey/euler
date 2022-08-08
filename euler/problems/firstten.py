@@ -68,13 +68,13 @@ def problem_five(num: int):
     factors = [prime.prime_factors(i) for i in range(1, num + 1)]
     used = []
     output = []
-
+    print(factors)
     for i in reversed(factors):
         if len(i) > 1 and len(set(i)) == 1:
             for y in i:
                 if y not in used:
                     output.append(y)
-            used.append(i[1])
+            used.append(i[0])
 
         if len(i) == 1 and i[0] not in used:
             output.append(i[0])
@@ -82,7 +82,43 @@ def problem_five(num: int):
     return math.prod(output)
 
 
-# if __name__ == "__main__":
-#     test = problem_five(20)
-#     print(test)
-# print(2 * 2 * 2 * 5 * 7 * 3 * 3)
+def problem_six(num):
+    """
+    The sum of the squares of the first ten natural numbers is,
+    1^2 + ... + 10^2 = 385
+    The square of the sum of the first ten natural numbers is,
+    (1+2+...+10)^2 = 3025
+    Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is,
+    3025-385 = 2640
+    Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+    """
+    sum_sq = 0
+    sq_sum = 0
+    for i in range(1, num + 1):
+        sum_sq += i * i
+        sq_sum += i
+    sq_sum *= sq_sum
+    return abs(sum_sq - sq_sum)
+
+
+def problem_seven(num):
+    """
+    By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+    What is the 10 001st prime number?
+    """
+    i = 0
+    output = 1
+
+    while i < num:
+        print(i, output)
+        output += 1
+        while not prime.is_prime(output):
+            output += 1
+        i += 1
+    print(i, output)
+    return output
+
+
+if __name__ == "__main__":
+    test = problem_seven(10)
+    # print(test)
