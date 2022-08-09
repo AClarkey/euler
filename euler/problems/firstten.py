@@ -177,22 +177,10 @@ def problem_ten(num: int) -> list[int]:
 
     Find the sum of all the primes below two million.
     """
-    if num <= 2:
-        return []
+    prime_bool = prime.eratosthenes_sieve(num)
 
-    # sieve_of_eratosthenes method
-    is_prime = [True] * num
-    is_prime[0] = False
-    is_prime[1] = False
-
-    for i in range(2, math.isqrt(num) + 1):
-        if is_prime[i]:
-            for x in range(i * i, num, i):
-                is_prime[x] = False
-                print(i, x)
-    return sum(i for i in range(num) if is_prime[i])
+    return sum(i for i in range(num) if prime_bool[i])
 
 
 if __name__ == "__main__":
-    test = problem_ten(100)
-    print(test)
+    # do stuff here if you want

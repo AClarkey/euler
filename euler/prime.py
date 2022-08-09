@@ -1,4 +1,5 @@
 """Prime number related helper functions"""
+import math
 
 
 def is_prime(num: int) -> bool:
@@ -51,6 +52,24 @@ def prime_factors(num: int) -> list:
     return output
 
 
+def eratosthenes_sieve(num):
+    """Return all prime numbers up to a given limit num"""
+    if num <= 2:
+        return []
+
+    prime_bool = [True] * num
+    prime_bool[0] = False
+    prime_bool[1] = False
+
+    for i in range(2, math.isqrt(num) + 1):
+        if prime_bool[i]:
+            for x in range(i * i, num, i):
+                prime_bool[x] = False
+    return prime_bool
+
+
 if __name__ == "__main__":
-    print("two")
-    print(prime_factors(2), type(prime_factors(2)))
+    test = eratosthenes_sieve(10)
+    print(test)
+    output = [i for i in range(10) if test[i]]
+    print(output)

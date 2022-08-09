@@ -35,3 +35,10 @@ def test_prime_factors():
     actual = prime.prime_factors(13195)
     expected = [5, 7, 13, 29]
     assert actual == expected
+
+
+def test_eratosthenes_sieve():
+    """test eratosthenes_sieve"""
+    actual = prime.eratosthenes_sieve(10)
+    expected = [False, False, True, True, False, True, False, True, False, False]
+    assert actual == expected
