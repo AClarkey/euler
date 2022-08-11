@@ -42,3 +42,10 @@ def test_problem_twelve(test_input, expected):
     """testing problem_twelve"""
     actual, divisors = secondten.problem_twelve(test_input)
     assert actual == expected
+
+
+def test_problem_thirteen():
+    """testing problem_twelve"""
+    actual = secondten.problem_thirteen(10)
+    expected = 5537376230
+    assert int(actual) == expected
