@@ -68,8 +68,21 @@ def eratosthenes_sieve(num):
     return prime_bool
 
 
+def divisors(num):
+    """
+    Returns the count of divisors of num
+
+        Assume num is a positive natural number
+    """
+    p_factors = prime_factors(num)
+    dict = {i: p_factors.count(i) for i in set(p_factors)}
+    divisors = 1
+    for i in dict.keys():
+        divisors = divisors * (dict[i] + 1)
+
+    return divisors
+
+
 if __name__ == "__main__":
-    test = eratosthenes_sieve(10)
-    print(test)
-    output = [i for i in range(10) if test[i]]
-    print(output)
+    for i in range(50):
+        print(i, divisors(i))

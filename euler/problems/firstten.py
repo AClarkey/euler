@@ -180,7 +180,3 @@ def problem_ten(num: int) -> list[int]:
     prime_bool = prime.eratosthenes_sieve(num)
 
     return sum(i for i in range(num) if prime_bool[i])
-
-
-if __name__ == "__main__":
-    # do stuff here if you want

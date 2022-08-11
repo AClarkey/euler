@@ -2,6 +2,8 @@
 
 from euler import prime
 
+import pytest
+
 
 def test_is_prime():
     """testing is_prime function"""
@@ -31,7 +33,7 @@ def test_is_prime():
 
 
 def test_prime_factors():
-    """testing test_prime_factors function"""
+    """testing prime_factors function"""
     actual = prime.prime_factors(13195)
     expected = [5, 7, 13, 29]
     assert actual == expected
@@ -41,4 +43,11 @@ def test_eratosthenes_sieve():
     """test eratosthenes_sieve"""
     actual = prime.eratosthenes_sieve(10)
     expected = [False, False, True, True, False, True, False, True, False, False]
+    assert actual == expected
+
+
+@pytest.mark.parametrize("test_input, expected", [(24, 8), (30, 8), (48, 10)])
+def test_divisors(test_input, expected):
+    """testing divisors function"""
+    actual = prime.divisors(test_input)
     assert actual == expected
