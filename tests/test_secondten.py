@@ -70,3 +70,10 @@ def test_problem_sixteen():
     actual = secondten.problem_sixteen(100)
     expected = 115
     assert actual == expected
+
+
+def test_problem_seventeen():
+    """testing problem_seventeen"""
+    actual = secondten.problem_seventeen(100)
+    expected = 864
+    assert actual == expected

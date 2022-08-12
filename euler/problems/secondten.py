@@ -301,15 +301,15 @@ def problem_seventeen(num):
         10: "ten",
     }
     teens = {
-        11: "eleven",
-        12: "twelve",
-        13: "thirteen",
-        14: "fourteen",
-        15: "fifteen",
-        16: "sixteen",
-        17: "seventeen",
-        18: "eighteen",
-        19: "nineteen",
+        1: "eleven",
+        2: "twelve",
+        3: "thirteen",
+        4: "fourteen",
+        5: "fifteen",
+        6: "sixteen",
+        7: "seventeen",
+        8: "eighteen",
+        9: "nineteen",
     }
     tens = {
         1: "ten",
@@ -322,37 +322,54 @@ def problem_seventeen(num):
         8: "eighty",
         9: "ninety",
     }
-
     length = 0
     for i in range(1, num + 1):
-
-        # first digit
         if i <= 10:
-            length += len(str(single[i]))
+            number = str(single[i])
 
-        # second digit
         if i > 10 and i < 20:
-            length += len(str(teens[i]))
-
+            number = teens[int(str(i)[1])]
         if i >= 20 and i < 100:
-
-            if int(str(i)[1]) == 0:
-                number = f"{tens[int(str(i)[0])]}"
-                print(number)
-
+            dig_one = str(i)[0]
+            dig_two = str(i)[1]
+            if int(dig_two) == 0:
+                number = f"{tens[int(dig_one)]}"
             else:
-                number = f"{tens[int(str(i)[0])]}-{single[int(str(i)[1])]}"
-                print(number)
+                number = f"{tens[int(dig_one)]}-{single[int(dig_two)]}"
 
-    # third digit here.
+        if i >= 100 and i < 1000:
+            dig_one = str(i)[0]
+            dig_two = str(i)[1]
+            dig_three = str(i)[2]
 
-    # single fourth for 1000.
+            if dig_two == "0" and dig_three == "0":
+                number = f"{single[int(dig_one)]} hundred"
+            elif dig_two == "0":
+                number = f"{single[int(dig_one)]} hundred and {single[int(dig_three)]}"
+            elif dig_three == "0":
+                number = f"{single[int(dig_one)]} hundred and {tens[int(dig_two)]}"
+            elif dig_two == "1":
+                number = f"{single[int(dig_one)]} hundred and {teens[int(dig_three)]}"
+            else:
+                number = f"{single[int(dig_one)]} hundred and {tens[int(dig_two)]}-{single[int(dig_three)]}"
 
-    # call em all once.
+        if i == 1000:
+            number = "one thousand"
+
+        length += len(number.replace(" ", "").replace("-", ""))
 
     return length
 
 
+def problem_eighteen(num: int) -> int:
+    """
+    2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+    What is the sum of the digits of the number 2^1000?
+    """
+
+    return output
+
+
 if __name__ == "__main__":
-    test = problem_seventeen(99)
+    test = problem_eighteen(100)
     print(test)
