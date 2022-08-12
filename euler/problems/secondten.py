@@ -1,5 +1,6 @@
 """Project Euler: Problems 11-20"""
 import math
+from pickletools import read_unicodestring1
 import numpy as np
 
 from euler import prime
@@ -276,6 +277,82 @@ def problem_sixteen(num: int) -> int:
     return output
 
 
+def problem_seventeen(num):
+    """
+    If the numbers 1 to 5 are written out in words:
+    one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+    If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+    NOTE: Do not count spaces or hyphens.
+    For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters.
+    The use of "and" when writing out numbers is in compliance with British usage.
+    """
+
+    single = {
+        0: "",
+        1: "one",
+        2: "two",
+        3: "three",
+        4: "four",
+        5: "five",
+        6: "six",
+        7: "seven",
+        8: "eight",
+        9: "nine",
+        10: "ten",
+    }
+    teens = {
+        11: "eleven",
+        12: "twelve",
+        13: "thirteen",
+        14: "fourteen",
+        15: "fifteen",
+        16: "sixteen",
+        17: "seventeen",
+        18: "eighteen",
+        19: "nineteen",
+    }
+    tens = {
+        1: "ten",
+        2: "twenty",
+        3: "thirty",
+        4: "forty",
+        5: "fifty",
+        6: "sixty",
+        7: "seventy",
+        8: "eighty",
+        9: "ninety",
+    }
+
+    length = 0
+    for i in range(1, num + 1):
+
+        # first digit
+        if i <= 10:
+            length += len(str(single[i]))
+
+        # second digit
+        if i > 10 and i < 20:
+            length += len(str(teens[i]))
+
+        if i >= 20 and i < 100:
+
+            if int(str(i)[1]) == 0:
+                number = f"{tens[int(str(i)[0])]}"
+                print(number)
+
+            else:
+                number = f"{tens[int(str(i)[0])]}-{single[int(str(i)[1])]}"
+                print(number)
+
+    # third digit here.
+
+    # single fourth for 1000.
+
+    # call em all once.
+
+    return length
+
+
 if __name__ == "__main__":
-    test = problem_sixteen(1000)
+    test = problem_seventeen(99)
     print(test)
