@@ -1,8 +1,8 @@
 """Project Euler: Problems 11-20"""
-from euler import prime
-
 import math
 import numpy as np
+
+from euler import prime
 
 
 def problem_eleven(data, num):
@@ -195,11 +195,87 @@ def problem_thirteen(num):
         53503534226472524250874054075591789781264330331690,
     ]
     output = 0
-    for i in range(len(input)):
-        output += input[i]
+
+    for index, element in enumerate(input):
+        output += element
+
     return str(output)[0:num]
 
 
-if __name__ == "__main__":
-    number = problem_thirteen(10)
+def problem_fourteen(num):
+    """
+    The following iterative sequence is defined for the set of positive integers:
+        n → n/2 (n is even)
+        n → 3n + 1 (n is odd)
+    Using the rule above and starting with 13, we generate the following sequence:
+    13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+    It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms.
+    Although it has not been proved yet (Collatz Problem), it is thought that all starting
+    numbers finish at 1.
+    Which starting number, under one million, produces the longest chain?
+
+    NOTE: Once the chain starts the terms are allowed to go above one million.
+    """
+    max_length = 1
+    for i in range(3, num, 2):
+
+        length = 1
+        collatz = i
+        while collatz > 1:
+
+            if collatz % 2 == 0:
+                collatz = collatz / 2
+                length += 1
+            else:
+                collatz = (3 * collatz) + 1
+                length += 1
+        if length > max_length:
+            max_length, variable = length, i
+
+    return max_length, variable
+
+
+def problem_fifteen(moves: int, right: int) -> int:
+    """
+    Starting in the top left corner of a 2×2 grid, and only being able to
+    move to the right and down, there are exactly 6 routes to the bottom right corner.
+    How many such routes are there through a 20×20 grid?
+    """
+
+    # permutation - when the order does matter (lock combo 812 matters, 6 perms)
+    # repetition is allowed:        n^r
+    # 0-10 lock, 3 numbers, = 10^3
+
+    # repetition isn't allowed:     n!/(n-r)!
+    # order of choosing 3 of 16 pool balls, = 16!/13! = 16*15*14 = 3,360
+
+    # combination - when the order doesn't matter (lock combo 812, 218, 182 etc. 1 combo)
+    # repetition is allowed:        (r + n - 1)! / r!(n - 1)!
+
+    # repetition isn't allowed:     n!/r!(n-r)! or ( n over r)
+    # lottery, matching numbers. reduce perm by how many objects we can order in it
+    # choosing 3 of 16 pool balls, = 16!/3!13! = 16*15*14 * 1/6 = 560
+    # "16 choose 3" - "Binomial coefficient"
+
+    # num moves in the grid, consisting of
+    return math.factorial(moves) / (
+        math.factorial(right) * math.factorial(moves - right)
+    )
+
+
+def problem_sixteen(num: int) -> int:
+    """
+    2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+    What is the sum of the digits of the number 2^1000?
+    """
+    number = 2**num
     print(number)
+    output = 0
+    for i in str(number):
+        output += int(i)
+    return output
+
+
+if __name__ == "__main__":
+    test = problem_sixteen(1000)
+    print(test)

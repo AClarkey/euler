@@ -45,7 +45,28 @@ def test_problem_twelve(test_input, expected):
 
 
 def test_problem_thirteen():
-    """testing problem_twelve"""
+    """testing problem_thirteen"""
     actual = secondten.problem_thirteen(10)
     expected = 5537376230
     assert int(actual) == expected
+
+
+@pytest.mark.parametrize("test_input, expected", [(10, 9), (100, 97), (1000, 871)])
+def test_problem_fourteen(test_input, expected):
+    """testing problem_fourteen"""
+    length, actual = secondten.problem_fourteen(test_input)
+    assert int(actual) == expected
+
+
+def test_problem_fifteen():
+    """testing problem_fifteen"""
+    actual = secondten.problem_fifteen(14, 7)
+    expected = 3432
+    assert actual == expected
+
+
+def test_problem_sixteen():
+    """testing problem_sixteen"""
+    actual = secondten.problem_sixteen(100)
+    expected = 115
+    assert actual == expected

@@ -77,8 +77,8 @@ def divisors(num):
     p_factors = prime_factors(num)
     dict = {i: p_factors.count(i) for i in set(p_factors)}
     divisors = 1
-    for i in dict.keys():
-        divisors = divisors * (dict[i] + 1)
+    for key in dict.keys():
+        divisors = divisors * (dict[key] + 1)
 
     return divisors
 
