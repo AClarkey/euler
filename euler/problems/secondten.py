@@ -361,7 +361,7 @@ def problem_seventeen(num):
     return length
 
 
-def problem_eighteen() -> int:
+def problem_eighteen():
     """
     By starting at the top of the triangle below and moving to adjacent numbers on the row below,
     the maximum total from top to bottom is 23.
@@ -400,6 +400,75 @@ def problem_eighteen() -> int:
     return input[0][0]
 
 
+def problem_nineteen(start: int, end: int, period: int) -> int:
+    """You are given the following information, but you may prefer to do some research for yourself.
+    1 Jan 1900 was a Monday.
+    Thirty days has September,
+    April, June and November.
+    All the rest have thirty-one,
+    Saving February alone,
+    Which has twenty-eight, rain or shine.
+    And on leap years, twenty-nine.
+    A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+    How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+    start = Beginning year
+    end = Last year
+    period = Year to start counting
+    """
+    days = {
+        1: 31,
+        2: 28,
+        3: 31,
+        4: 30,
+        5: 31,
+        6: 30,
+        7: 31,
+        8: 31,
+        9: 30,
+        10: 31,
+        11: 30,
+        12: 31,
+    }
+
+    weekday = 0
+    sunday_count = 0
+    output = 0
+
+    # year
+    for year in range(start, end + 1):
+        if (year % 400 == 0) and (year % 100 == 0):
+            leap_year = True
+        elif (year % 4 == 0) and (year % 100 != 0):
+            leap_year = True
+        else:
+            leap_year = False
+        # month
+        for month in range(1, 13):
+            # day
+            if leap_year and month == 2:
+                for day in range(1, 30):
+                    if weekday == 7:
+                        weekday = 1
+                    else:
+                        weekday += 1
+                        if weekday == 7:
+                            sunday_count += 1
+                    if weekday == 7 and day == 1 and year >= period:
+                        output += 1
+            else:
+                for day in range(1, days[month] + 1):
+                    if weekday == 7:
+                        weekday = 1
+                    else:
+                        weekday += 1
+                        if weekday == 7:
+                            sunday_count += 1
+                    if weekday == 7 and day == 1 and year >= period:
+                        output += 1
+    return output
+
+
 if __name__ == "__main__":
-    test = problem_eighteen()
+    test = problem_nineteen(1900, 2000, 1901)
     print(test)
