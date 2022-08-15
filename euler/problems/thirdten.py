@@ -15,10 +15,19 @@ def problem_twenty_one(num):
 
     Evaluate the sum of all the amicable numbers under 10000.
     """
+    output = 0
 
-    return num
+    for a in range(2, num + 1):
+
+        b = sum(prime.divisors(a, True))
+        c = sum(prime.divisors(b, True))
+
+        if a == c and a != b:
+            output += a
+
+    return output
 
 
 if __name__ == "__main__":
-    test = problem_twenty_one(100)
+    test = problem_twenty_one(1000)
     print(test)

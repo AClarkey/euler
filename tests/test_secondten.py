@@ -1,4 +1,4 @@
-"""Tests for firstten problems"""
+"""Tests for secondten problems"""
 
 from euler.problems import secondten
 

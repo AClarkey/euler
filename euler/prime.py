@@ -101,5 +101,5 @@ def divisors(num: int, proper: bool = True) -> list:
 
 
 if __name__ == "__main__":
-    for i in range(10):
-        print(i, divisors(i, False))
+    for i in range(1, 20):
+        print(i, prime_factors(i), divisors(i, True))
