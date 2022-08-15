@@ -1,6 +1,5 @@
 """Project Euler: Problems 11-20"""
 import math
-from pickletools import read_unicodestring1
 import numpy as np
 
 from euler import prime
@@ -79,7 +78,7 @@ def problem_twelve(num):
 
     while True:
         natural_num += i
-        output = prime.divisors(natural_num)
+        output = prime.divisors_count(natural_num)
 
         if output > num:
             break
@@ -469,6 +468,24 @@ def problem_nineteen(start: int, end: int, period: int) -> int:
     return output
 
 
+def problem_twenty(num: int) -> int:
+    """
+    n! means n × (n − 1) × ... × 3 × 2 × 1
+
+    For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+    and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+
+    Find the sum of the digits in the number 100!
+    """
+    number = math.factorial(num)
+
+    output = 0
+    for i in str(number):
+        output += int(i)
+
+    return output
+
+
 if __name__ == "__main__":
-    test = problem_nineteen(1900, 2000, 1901)
+    test = problem_twenty(100)
     print(test)

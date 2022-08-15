@@ -52,7 +52,7 @@ def prime_factors(num: int) -> list:
     return output
 
 
-def eratosthenes_sieve(num):
+def eratosthenes_sieve_prime(num):
     """Return all prime numbers up to a given limit num"""
     if num <= 2:
         return []
@@ -68,21 +68,38 @@ def eratosthenes_sieve(num):
     return prime_bool
 
 
-def divisors(num):
+def divisors_count(num):
     """
-    Returns the count of divisors of num
-
-        Assume num is a positive natural number
+    Returns the count of divisors of {num}: Assumes {num} is a positive natural number
     """
     p_factors = prime_factors(num)
     dict = {i: p_factors.count(i) for i in set(p_factors)}
     divisors = 1
-    for key in dict.keys():
-        divisors = divisors * (dict[key] + 1)
+    for v in dict.values():
+        divisors = divisors * (v + 1)
 
     return divisors
 
 
+def divisors(num: int, proper: bool = True) -> list:
+    """
+    Returns the proper divisors of {num}: Assumes {num} is a positive natural number
+
+        parameters:
+            propers: (default) True = returns only proper divisors, e.g., not including {num} itself
+    """
+    p_factors = prime_factors(num)
+    dict = {i: p_factors.count(i) for i in set(p_factors)}
+    divs = [1]
+    for k, v in dict.items():
+        divs += [x * k**i for i in range(1, v + 1) for x in divs]
+
+    if proper:
+        divs.remove(num)
+
+    return sorted(divs)
+
+
 if __name__ == "__main__":
-    for i in range(50):
-        print(i, divisors(i))
+    for i in range(10):
+        print(i, divisors(i, False))

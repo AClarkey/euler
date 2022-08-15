@@ -39,15 +39,29 @@ def test_prime_factors():
     assert actual == expected
 
 
-def test_eratosthenes_sieve():
+def test_eratosthenes_sieve_prime():
     """test eratosthenes_sieve"""
-    actual = prime.eratosthenes_sieve(10)
+    actual = prime.eratosthenes_sieve_prime(10)
     expected = [False, False, True, True, False, True, False, True, False, False]
     assert actual == expected
 
 
 @pytest.mark.parametrize("test_input, expected", [(24, 8), (30, 8), (48, 10)])
-def test_divisors(test_input, expected):
+def test_divisors_count(test_input, expected):
     """testing divisors function"""
-    actual = prime.divisors(test_input)
+    actual = prime.divisors_count(test_input)
+    assert actual == expected
+
+
+test_data = [
+    (24, False, [1, 2, 3, 4, 6, 8, 12, 24]),
+    (24, True, [1, 2, 3, 4, 6, 8, 12]),
+    (220, None, [1, 2, 4, 5, 10, 11, 20, 22, 44, 55, 110, 220]),
+]
+
+
+@pytest.mark.parametrize("num, prime_divisor_bool, expected", test_data)
+def test_divisors(num, prime_divisor_bool, expected):
+    """testing divisors function"""
+    actual = prime.divisors(num, prime_divisor_bool)
     assert actual == expected

@@ -171,12 +171,12 @@ def problem_nine(num):
                     return a * b * c
 
 
-def problem_ten(num: int) -> list[int]:
+def problem_ten(num: int) -> list:
     """
     The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 
     Find the sum of all the primes below two million.
     """
-    prime_bool = prime.eratosthenes_sieve(num)
+    prime_bool = prime.eratosthenes_sieve_prime(num)
 
     return sum(i for i in range(num) if prime_bool[i])
