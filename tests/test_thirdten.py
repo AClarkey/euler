@@ -18,3 +18,12 @@ def test_problem_twenty_two():
     actual = thirdten.problem_twenty_two("p022_names.txt")
     expected = 871198282
     assert actual == expected
+
+
+def test_problem_twenty_three():
+    """testing problem_twenty_three
+    Sum of all numbers up to 100 that can't be the sum of two abubdant numbers
+    """
+    actual = thirdten.problem_twenty_three(100)
+    expected = 2766
+    assert actual == expected

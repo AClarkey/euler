@@ -1,4 +1,5 @@
 """Project Euler: Problems 21-30"""
+from bz2 import compress
 import math
 import numpy as np
 import csv
@@ -76,22 +77,19 @@ def problem_twenty_three(num: int) -> int:
 
     Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
     """
+    abundant = [i for i in range(12, num) if sum(prime.divisors(i, True)) > i]
+    numbers = [True] * num
+
+    for x in abundant:
+        for y in abundant[0 : abundant.index(x) + 1]:
+            z = x + y
+            if z < num + 1 and numbers[z - 1] == True:
+                numbers[z - 1] = False
+
     output = 0
-    for i in range(1, num):
-        perfect = False
-        deficient = False
-        abundant = False
-        total = sum(prime.divisors(i, True))
-
-        if total == i:
-            perfect = True
-        elif total < i:
-            deficient = True
-        else:
-            abundant = True
-
-        if abundant:
-            print(f"Number: {i}, Sum: {total}")
+    for i in range(0, num):
+        if numbers[i]:
+            output += i + 1
 
     return output
 
