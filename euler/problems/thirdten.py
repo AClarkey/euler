@@ -1,9 +1,9 @@
 """Project Euler: Problems 21-30"""
-from bz2 import compress
 import math
 import numpy as np
 import csv
 import string
+import itertools
 
 from euler import prime
 
@@ -94,6 +94,26 @@ def problem_twenty_three(num: int) -> int:
     return output
 
 
+def problem_twenty_four(num: str, position: int) -> str:
+    """
+    A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation
+    of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically,
+    we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+    012   021   102   120   201   210
+    What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+    """
+    number = [i for i in num]
+
+    perm = list(itertools.permutations(number))
+    perm.sort()
+    perm_final = perm[position - 1]
+
+    output = ""
+    for i in perm_final:
+        output += i
+    return output
+
+
 if __name__ == "__main__":
-    test = problem_twenty_three(100)
-    print(test)
+    test = problem_twenty_four("431205", 100)
+    print(test, type(test))
