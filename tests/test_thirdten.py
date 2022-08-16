@@ -38,3 +38,14 @@ def test_problem_twenty_four(digits, iteration, expected_result):
     actual = thirdten.problem_twenty_four(digits, iteration)
     expected = expected_result
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(3, 12), (10, 45)],
+)
+def test_problem_twenty_five(input, expected_result):
+    """testing problem_twenty_five"""
+    actual = thirdten.problem_twenty_five(input)
+    expected = expected_result
+    assert actual == expected
