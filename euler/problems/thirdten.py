@@ -1,9 +1,12 @@
 """Project Euler: Problems 21-30"""
 import math
+from decimal import Decimal, getcontext
+
 import numpy as np
 import csv
 import string
 import itertools
+
 
 from euler import prime
 
@@ -149,6 +152,35 @@ def problem_twenty_five(num: int) -> int:
     return i
 
 
+def problem_twenty_six(num: int) -> int:
+    """
+    A unit fraction contains 1 in the numerator. The decimal representation of the unit
+    fractions with denominators 2 to 10 are given:
+
+    1/2	= 	0.5
+    1/3	= 	0.(3)
+    1/4	= 	0.25
+    1/5	= 	0.2
+    1/6	= 	0.1(6)
+    1/7	= 	0.(142857)
+    1/8	= 	0.125
+    1/9	= 	0.(1)
+    1/10	= 	0.1
+    Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be seen
+    that 1/7 has a 6-digit recurring cycle.
+
+    Find the value of d < 1000 for which 1/d contains the longest recurring cycle in
+    its decimal fraction part.
+    """
+    output = 0
+    getcontext().prec = 50
+    for i in range(2, num + 1):
+        number = Decimal(1) / Decimal(i)
+        print(number)
+
+    return
+
+
 if __name__ == "__main__":
-    test = problem_twenty_five(3)
-    print(test)
+    test = problem_twenty_six(10)
+    # print(test)
