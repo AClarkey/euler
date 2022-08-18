@@ -2,6 +2,7 @@
 import math
 from decimal import Decimal, getcontext
 
+import re
 import numpy as np
 import csv
 import string
@@ -152,7 +153,7 @@ def problem_twenty_five(num: int) -> int:
     return i
 
 
-def problem_twenty_six(num: int) -> int:
+def problem_twenty_six(numbers: int) -> int:
     """
     A unit fraction contains 1 in the numerator. The decimal representation of the unit
     fractions with denominators 2 to 10 are given:
@@ -172,15 +173,42 @@ def problem_twenty_six(num: int) -> int:
     Find the value of d < 1000 for which 1/d contains the longest recurring cycle in
     its decimal fraction part.
     """
-    output = 0
-    getcontext().prec = 50
-    for i in range(2, num + 1):
-        number = Decimal(1) / Decimal(i)
-        print(number)
+    output = {}
+    index = 0
 
-    return
+    for i in range(2, numbers):
+
+        decimals = []
+        divisor = i
+        remainder = 1
+        dividend = 1
+
+        while remainder != 0 and len(decimals) < (numbers * 2) + 1:
+
+            quotient = math.floor(dividend / divisor)
+            decimals.append(quotient)
+            remainder = dividend % divisor
+            dividend = remainder * 10
+
+        number = ""
+        for y in range(0, len(decimals)):
+            number += str(decimals[y])
+
+        number = number.lstrip("0")
+
+        pattern = re.compile(r"(.+?)\1+")
+        sequence = re.findall(pattern, number)
+
+        if sequence == []:
+            sequence_length = 0
+        else:
+            sequence_length = len(max(sequence, key=len))
+            if sequence_length > index:
+                index = i
+        output[i] = sequence
+    return index
 
 
 if __name__ == "__main__":
-    test = problem_twenty_six(10)
-    # print(test)
+    test = problem_twenty_six(100)
+    print(test)
