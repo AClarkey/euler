@@ -213,32 +213,49 @@ def problem_twenty_seven(numbers: int) -> int:
 
     val_a = prime.eratosthenes_sieve_prime(numbers)
     set_a = [i for i in range(numbers) if val_a[i]]
-    set_a += [-i for i in set_a]
-
-    val_b = prime.eratosthenes_sieve_prime(numbers + 1)
-    set_b = [i for i in range(numbers + 1) if val_b[i]]
 
     value = 0
 
     for a in set_a:
-        for b in set_b:
-            i = 0
+        for b in set_a:
 
+            i = 0
             while True:
 
-                total = (i * i) + (a * i) + b
+                total = i**2 + a * i + b
 
-                if prime.is_prime(total):
-                    i += 1
-                else:
-                    if i - 1 > value:
-                        value = i - 1
+                if not prime.is_prime(total):
+
+                    if i > value:
+
+                        value = i
                         axb = a * b
-                        # print(a, b, axb)
+                        print(i, a, b, axb)
+
                     break
+                else:
+                    i += 1
+
+            i = 0
+            while True:
+
+                total = i**2 - a * i + b
+
+                if not prime.is_prime(total):
+                    if i > value:
+                        value = i
+                        axb = -1 * a * b
+                        print(i, a, b, axb)
+                    break
+                else:
+                    i += 1
     return axb
 
 
 if __name__ == "__main__":
-    test = problem_twenty_seven(1000)
+    test = problem_twenty_seven(10)
     print(test)
+
+    # test = prime.eratosthenes_sieve_prime(1000)
+    # test1 = [i for i in range(1000) if test[i]]
+    # print(test1, len(test1))
