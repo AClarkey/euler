@@ -8,7 +8,6 @@ import csv
 import string
 import itertools
 import copy
-import sympy
 
 
 from euler import prime
@@ -247,28 +246,38 @@ def problem_twenty_seven(numbers: int) -> int:
 
 
 def problem_twenty_eight(size: int) -> int:
-    test = np.zeros((size, size))
+    """
+    It can be verified that the sum of the numbers on the diagonals is 101.
+    What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+    """
+    total = 4
+    counter = 3
+    length = 2
 
-    row = math.floor(size / 2)
-    col = math.floor(size / 2)
-    i = 1
+    while counter <= size**2 - size:
 
-    print(test)
+        if length % 2 == 0:
+            counter += length
+            total += counter
 
-    while i < size**2 + 1:
+            counter += length
+            total += counter
 
-        test[row, col] = i
-        i += 1
+            length += 1
+        else:
+            counter += length
+            total += counter - 1  # upper right diagonal correction
 
-    # 1 R, 1 D,
-    # 2 L, 2 U,
-    # 3 R, 3, D,
-    # 4 L, 4 U,
-    # 5 R
+            counter += length
+            total += counter
+
+            length += 1
+
+    total += size**2  # spiral ends top left, add top right to total
+
+    return total
 
 
 if __name__ == "__main__":
-    test = problem_twenty_eight(
-        11,
-    )
+    test = problem_twenty_eight(1001)
     print(test)

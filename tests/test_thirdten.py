@@ -63,3 +63,10 @@ def test_problem_twenty_seven():
     actual = thirdten.problem_twenty_seven(10)
     expected = -35
     assert actual == expected
+
+
+def test_problem_twenty_eight():
+    """testing problem_twenty_eight"""
+    actual = thirdten.problem_twenty_eight(5)
+    expected = 101
+    assert actual == expected
