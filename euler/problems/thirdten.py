@@ -246,6 +246,29 @@ def problem_twenty_seven(numbers: int) -> int:
     return axb
 
 
+def problem_twenty_eight(size: int) -> int:
+    test = np.zeros((size, size))
+
+    row = math.floor(size / 2)
+    col = math.floor(size / 2)
+    i = 1
+
+    print(test)
+
+    while i < size**2 + 1:
+
+        test[row, col] = i
+        i += 1
+
+    # 1 R, 1 D,
+    # 2 L, 2 U,
+    # 3 R, 3, D,
+    # 4 L, 4 U,
+    # 5 R
+
+
 if __name__ == "__main__":
-    test = problem_twenty_seven(10)
+    test = problem_twenty_eight(
+        11,
+    )
     print(test)
