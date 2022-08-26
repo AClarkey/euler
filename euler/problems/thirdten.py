@@ -7,6 +7,8 @@ import numpy as np
 import csv
 import string
 import itertools
+import copy
+import sympy
 
 
 from euler import prime
@@ -210,7 +212,10 @@ def problem_twenty_six(numbers: int) -> int:
 
 
 def problem_twenty_seven(numbers: int) -> int:
-
+    """
+    Find the product of the coefficients,  and , for the quadratic expression that produces
+    the maximum number of primes for consecutive values of , starting with n = 0.
+    """
     val_a = prime.eratosthenes_sieve_prime(numbers)
     set_a = [i for i in range(numbers) if val_a[i]]
 
@@ -219,43 +224,28 @@ def problem_twenty_seven(numbers: int) -> int:
     for a in set_a:
         for b in set_a:
 
-            i = 0
-            while True:
+            n = 0
 
-                total = i**2 + a * i + b
+            while prime.is_prime(n**2 + a * n + b):
+                n += 1
 
-                if not prime.is_prime(total):
+            if n > value:
 
-                    if i > value:
+                value = n
+                axb = a * b
 
-                        value = i
-                        axb = a * b
-                        print(i, a, b, axb)
+            n = 0
+            while prime.is_prime(n**2 - a * n + b):
+                n += 1
 
-                    break
-                else:
-                    i += 1
+            if n > value:
 
-            i = 0
-            while True:
+                value = n
+                axb = -1 * a * b
 
-                total = i**2 - a * i + b
-
-                if not prime.is_prime(total):
-                    if i > value:
-                        value = i
-                        axb = -1 * a * b
-                        print(i, a, b, axb)
-                    break
-                else:
-                    i += 1
     return axb
 
 
 if __name__ == "__main__":
     test = problem_twenty_seven(10)
     print(test)
-
-    # test = prime.eratosthenes_sieve_prime(1000)
-    # test1 = [i for i in range(1000) if test[i]]
-    # print(test1, len(test1))

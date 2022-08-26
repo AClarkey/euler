@@ -3,18 +3,15 @@ import math
 
 
 def is_prime(num: int) -> bool:
-    """
-    Assume n is a positive natural number
-
-        returns True/False of prime
-    """
+    """function to check if the number
+    is prime or not"""
+    if num == 0:
+        return False
     if num == 1:
         return False
-    i = 2
-    while i * i <= num:
+    for i in range(2, int(abs(num) ** 0.5) + 1):
         if num % i == 0:
             return False
-        i += 1
     return True
 
 

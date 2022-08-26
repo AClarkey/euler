@@ -7,8 +7,9 @@ import pytest
 
 def test_is_prime():
     """testing is_prime function"""
-    actual = {f"{i:2}": prime.is_prime(i) for i in range(1, 20)}
+    actual = {f"{i:2}": prime.is_prime(i) for i in range(0, 20)}
     expected = {
+        " 0": False,
         " 1": False,
         " 2": True,
         " 3": True,
