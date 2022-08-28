@@ -295,6 +295,20 @@ def problem_twenty_nine(start: int, end: int) -> int:
     return len(output)
 
 
+def problem_thirty(number: int, digits: int) -> int:
+    """
+    Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+    """
+    output = []
+    for i in range(1000, number):
+        total = 0
+        for y in str(i):
+            total += int(y) ** digits
+        if total == i:
+            output.append(total)
+    return sum(output)
+
+
 if __name__ == "__main__":
     test = problem_twenty_nine(2, 100)
     print(test)
