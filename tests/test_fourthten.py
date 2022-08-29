@@ -1,14 +1,16 @@
 """Tests for thirdten problems"""
 
-from euler.problems import thirdten
+from euler.problems import fourthten
 
 import numpy as np
 import pytest
 
 
-def test_problem_thirty_one():
+@pytest.mark.parametrize(
+    "coins, total, expected_result",
+    [([2, 3, 5], 15, 7), ([2, 3, 5, 10], 100, 743)],
+)
+def test_problem_thirty_one(coins, total, expected_result):
     """testing test_problem_thirty_one"""
-    # actual = thirdten.problem_thirty_one(1000)
-    # expected = 504
-    # assert actual == expected
-    pass
+    actual = fourthten.problem_thirty_one(coins, total)
+    assert actual == expected_result
