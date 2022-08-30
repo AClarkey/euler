@@ -40,7 +40,47 @@ def problem_thirty_one(coins: list, total: int) -> int:
     return a[-1, -1]
 
 
-if __name__ == "__main__":
-    test = problem_thirty_one([2, 3, 5, 10], 100)
+def problem_thirty_two() -> int:
+    """
+    Find the sum of all products whose multiplicand/multiplier/product
+    identity can be written as a 1 through 9 pandigital.
+    """
+    products = []
 
+    for i in range(1, 100):
+
+        if "0" in str(i):
+            continue
+
+        for y in range(1, 10000):
+
+            if "0" in str(y):
+                continue
+
+            for x in str(i):
+                if x in str(y):
+                    continue
+
+            variable = []
+            product = i * y
+
+            if "0" in str(product):
+                continue
+
+            total = f"{i}{y}{product}"
+
+            if len(total) == 9:
+                for z in total:
+                    variable.append(z)
+
+                variable = list(set(variable))
+
+                if len(variable) == 9:
+                    products.append(product)
+
+    return sum(list(set(products)))
+
+
+if __name__ == "__main__":
+    test = problem_thirty_two()
     print(test)
