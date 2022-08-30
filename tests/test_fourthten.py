@@ -28,3 +28,10 @@ def test_problem_thirty_three():
     actual = fourthten.problem_thirty_three(100)
     expected = 100
     assert actual == expected
+
+
+def test_problem_thirty_four():
+    """testing test_problem_thirty_four"""
+    actual = fourthten.problem_thirty_four(1000)
+    expected = 145
+    assert actual == expected

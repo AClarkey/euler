@@ -126,6 +126,32 @@ def problem_thirty_three(numbers: int) -> int:
     return helper.simplify_fraction((final_num, final_denom))[1]
 
 
+def problem_thirty_four(numbers: int) -> int:
+    """Find the sum of all numbers which are equal to the sum of the factorial of their digits."""
+
+    def max():
+        number = 1
+        fact9 = math.factorial(9)
+        while number * fact9 > 10 ** (number - 1):
+            number += 1
+
+        return 10 ** (number - 1)
+
+    # max = 1000000. Smallest 8 digit number > 8 * 9!
+
+    total = 0
+    factors = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
+
+    for i in range(3, numbers):
+
+        if i == sum(factors[int(n)] for n in str(i)):
+
+            total += i
+
+    return total
+
+
 if __name__ == "__main__":
-    test = problem_thirty_three(100)
+    test = problem_thirty_four(1000)
+
     print(test)
