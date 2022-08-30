@@ -81,6 +81,68 @@ def problem_thirty_two() -> int:
     return sum(list(set(products)))
 
 
+def problem_thirty_three(numbers: int) -> int:
+    """
+    There are exactly four non-trivial examples of this type of fraction,
+    less than one in value, and containing two digits in the numerator and denominator.
+
+    If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+    """
+    nom = []
+    denoms = []
+
+    for i in range(10, numbers):
+        for y in range(10, numbers):
+            if i == y:
+                continue
+            if i == int(str(y)[::-1]):
+                continue
+            if "0" in str(i):
+                continue
+            if "0" in str(y):
+                continue
+
+            value_before = i / y
+
+            for z in str(i):
+                if z in str(y):
+                    num = str(i).replace(z, "")
+                    denom = str(y).replace(z, "")
+
+                    if num == "":
+                        num = z
+                    if denom == "":
+                        denom = z
+                    value_after = int(num) / int(denom)
+                else:
+                    value_after = 0
+
+            if value_before == value_after:
+                nom.append(i)
+                denoms.append(y)
+
+    final_denom = 1
+    for i in denoms:
+        final_denom *= i
+    final_num = 1
+    for i in nom:
+        final_num *= i
+
+    fraction = (final_num, final_denom)
+    while fraction[0] != fraction[1]:
+        maximum = max(fraction)
+        minimum = min(fraction)
+        fraction = (maximum - minimum, minimum)
+
+    divisor = fraction[0]
+
+    # print(final_num / divisor, final_denom / divisor)
+
+    # find LCD
+
+    return int(final_denom / divisor)
+
+
 if __name__ == "__main__":
-    test = problem_thirty_two()
+    test = problem_thirty_two(100)
     print(test)
