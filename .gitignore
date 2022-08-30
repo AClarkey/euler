@@ -1,6 +1,10 @@
 secrets.yaml
+
 ./vscode
 .vscode
+
 *.py[cod]
 tests/__pycache__/
 euler/problems/__pycache__/
+__pycache__/
+

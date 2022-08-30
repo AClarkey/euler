@@ -1,5 +1,7 @@
 """Project Euler: Problems 30-39"""
 
+from euler import helper
+
 import math
 from decimal import Decimal, getcontext
 
@@ -93,13 +95,7 @@ def problem_thirty_three(numbers: int) -> int:
 
     for i in range(10, numbers):
         for y in range(10, numbers):
-            if i == y:
-                continue
-            if i == int(str(y)[::-1]):
-                continue
-            if "0" in str(i):
-                continue
-            if "0" in str(y):
+            if i == y or i == int(str(y)[::-1]) or "0" in str(i) or "0" in str(y):
                 continue
 
             value_before = i / y
@@ -108,7 +104,6 @@ def problem_thirty_three(numbers: int) -> int:
                 if z in str(y):
                     num = str(i).replace(z, "")
                     denom = str(y).replace(z, "")
-
                     if num == "":
                         num = z
                     if denom == "":
@@ -128,21 +123,9 @@ def problem_thirty_three(numbers: int) -> int:
     for i in nom:
         final_num *= i
 
-    fraction = (final_num, final_denom)
-    while fraction[0] != fraction[1]:
-        maximum = max(fraction)
-        minimum = min(fraction)
-        fraction = (maximum - minimum, minimum)
-
-    divisor = fraction[0]
-
-    # print(final_num / divisor, final_denom / divisor)
-
-    # find LCD
-
-    return int(final_denom / divisor)
+    return helper.simplify_fraction((final_num, final_denom))[1]
 
 
 if __name__ == "__main__":
-    test = problem_thirty_two(100)
+    test = problem_thirty_three(100)
     print(test)
