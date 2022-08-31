@@ -1,19 +1,11 @@
 """Project Euler: Problems 30-39"""
 
-from euler import helper
+from euler import helper, prime
 
 import math
-from decimal import Decimal, getcontext
-
-import re
-import numpy as np
-import csv
-import string
 import itertools
-import copy
 
-
-from euler import prime
+import numpy as np
 
 
 def problem_thirty_one(coins: list, total: int) -> int:
@@ -151,7 +143,37 @@ def problem_thirty_four(numbers: int) -> int:
     return total
 
 
-if __name__ == "__main__":
-    test = problem_thirty_four(1000)
+def problem_thirty_five(numbers: int) -> int:
+    """The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+    There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+    How many circular primes are there below one million?
+    """
+    circular = []
 
+    for i in range(3, numbers, 2):
+        st = str(id)
+        if "2" in st or "4" in st or "6" in st or "8" in st or "5" in st or "0" in st:
+            continue
+        if not prime.is_prime(i):
+            continue
+
+        stop = False
+
+        rotation = helper.all_rotations(i)
+
+        for y in rotation:
+            if not prime.is_prime(y):
+                stop = True
+                continue
+        if stop:
+            continue
+        else:
+            circular.append(i)
+    circular.append(2)
+
+    return len(circular)
+
+
+if __name__ == "__main__":
+    test = problem_thirty_five(1000)
     print(test)
