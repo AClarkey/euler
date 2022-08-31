@@ -42,3 +42,13 @@ def test_problem_thirty_five():
     actual = fourthten.problem_thirty_five(1000)
     expected = 25
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "base, number, expected_result",
+    [(2, 1000, 1772), (4, 2000, 2556), (7, 10000, 301)],
+)
+def test_problem_thirty_six(base, number, expected_result):
+    """testing test_problem_thirty_six"""
+    actual = fourthten.problem_thirty_six(base, number)
+    assert actual == expected_result

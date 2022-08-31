@@ -174,6 +174,25 @@ def problem_thirty_five(numbers: int) -> int:
     return len(circular)
 
 
+def problem_thirty_six(base: int, numbers: int) -> int:
+    """The decimal number, 585 = 1001001001, base2 (binary), is palindromic in both bases.
+    Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+    (Please note that the palindromic number, in either base, may not include leading zeros.)
+    """
+
+    double_base = []
+
+    for i in range(1, numbers, 2):
+
+        base_number = helper.base_conversion(base, i)
+
+        if i == int(str(i)[::-1]):
+            if base_number == int(str(base_number)[::-1]):
+                double_base.append(i)
+
+    return sum(double_base)
+
+
 if __name__ == "__main__":
-    test = problem_thirty_five(1000)
+    test = problem_thirty_six(7, 10000)
     print(test)

@@ -23,3 +23,13 @@ def test_all_rotations(number, expected_result):
     """Ensure all fraction types simplify correctly"""
     actual = helper.all_rotations(number)
     assert actual == expected_result
+
+
+@pytest.mark.parametrize(
+    "base, number, expected_result",
+    [(2, 10, 1010), (4, 228, 3210), (7, 100, 202)],
+)
+def test_base_conversion(base, number, expected_result):
+    """Ensure multiple bases convert correctly"""
+    actual = helper.base_conversion(base, number)
+    assert actual == expected_result

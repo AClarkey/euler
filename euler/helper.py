@@ -36,6 +36,24 @@ def all_rotations(input: int) -> list:
     return output
 
 
+def base_conversion(base: int, number: int) -> int:
+    """convert any number of base10 to any number of baseX"""
+
+    output = ""
+    while True:
+
+        int_quotient = int(number / base)
+        remainder = number % base
+        output = f"{remainder}{output}"
+
+        if int_quotient == 0:
+            break
+
+        number = int_quotient
+
+    return int(output)
+
+
 if __name__ == "__main__":
-    test = all_rotations(2)
+    test = base_conversion(7, 100)
     print(test)
