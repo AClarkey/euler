@@ -52,3 +52,10 @@ def test_problem_thirty_six(base, number, expected_result):
     """testing test_problem_thirty_six"""
     actual = fourthten.problem_thirty_six(base, number)
     assert actual == expected_result
+
+
+def test_problem_thirty_seven():
+    """testing test_problem_thirty_seven"""
+    actual = fourthten.problem_thirty_seven(1000000)
+    expected = 748317
+    assert actual == expected

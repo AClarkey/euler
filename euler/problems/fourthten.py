@@ -4,6 +4,7 @@ from euler import helper, prime
 
 import math
 import itertools
+import time
 
 import numpy as np
 
@@ -193,6 +194,53 @@ def problem_thirty_six(base: int, numbers: int) -> int:
     return sum(double_base)
 
 
+def problem_thirty_seven(numbers: int) -> int:
+    """
+    The number 3797 has an interesting property. Being prime itself, it is possible
+    to continuously remove digits from left to right, and remain prime at each stage:
+
+    3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
+
+    Find the sum of the only eleven primes that are both truncatable from left to
+    right and right to left.
+    NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+    """
+
+    trunc = []
+    primes = prime.eratosthenes_sieve_prime(numbers)
+
+    for i in range(11, numbers):
+        flag = True
+
+        if not primes[i]:
+            continue
+
+        if i % 10 == 1 or int(str(i)[0]) in [1, 4, 6, 8]:
+            continue
+
+        if "0" in str(i) or "4" in str(i) or "6" in str(i) or "8" in str(i):
+            continue
+
+        length = len(str(i))  # 2
+
+        for y in range(length - 1):
+            right = str(i)[0 : length - y - 1]
+            left = str(i)[0 + y + 1 : length]
+            if not primes[int(right)] or not primes[int(left)]:
+                flag = False
+                continue
+
+        if flag:
+            trunc.append(i)
+
+    return sum(trunc)
+
+
 if __name__ == "__main__":
-    test = problem_thirty_six(7, 10000)
-    print(test)
+    start = time.time()
+
+    test = problem_thirty_seven(1000000)
+
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {test}, Runtime: {'%.3f' % runtime} seconds")
