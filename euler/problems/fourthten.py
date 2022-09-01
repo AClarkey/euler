@@ -323,10 +323,48 @@ def problem_thirty_nine(numbers: int) -> int:
     return output
 
 
+def problem_forty(numbers: int) -> int:
+    """
+    An irrational decimal fraction is created by concatenating the positive integers:
+    0.123456789101112131415161718192021...
+    It can be seen that the 12th digit of the fractional part is 1.
+    If dn represents the nth digit of the fractional part, find the value of the following expression.
+    d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
+
+    numbers = 10 ** numbers - 1 digits to go to.
+    """
+
+    index_to_find = []
+    for i in range(numbers):
+        index_to_find.append(10**i)
+
+    new_length = 0
+    old_length = 0
+    i = 0
+    digits = []
+
+    while new_length < 10**numbers:
+
+        if new_length >= index_to_find[0]:
+            index = index_to_find[0] - old_length
+            digits.append(int(str(i)[index - 1]))
+            index_to_find.pop(0)
+
+            if index_to_find == []:
+                break
+
+        i += 1
+        old_length = new_length
+        new_length += len(str(i))
+
+    return np.prod(digits)
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    test = problem_thirty_nine(25)
+    test = problem_forty(6)
+    # print(test)
 
     end = time.time()
     runtime = end - start

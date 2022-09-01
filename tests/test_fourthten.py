@@ -76,3 +76,13 @@ def test_problem_thirty_nine(lengths, expected_result):
     """testing test_problem_thirty_nine"""
     actual = fourthten.problem_thirty_nine(lengths)
     assert actual == expected_result
+
+
+@pytest.mark.parametrize(
+    "size, expected_result",
+    [(4, 15), (5, 105), (6, 210)],
+)
+def test_problem_forty(size, expected_result):
+    """testing test_problem_forty"""
+    actual = fourthten.problem_forty(size)
+    assert actual == expected_result
