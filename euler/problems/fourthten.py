@@ -287,10 +287,46 @@ def problem_thirty_eight() -> int:
     return int(max(pand))
 
 
+def problem_thirty_nine(numbers: int) -> int:
+    """
+    If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
+
+    {20,48,52}, {24,45,51}, {30,40,50}
+
+    For which value of p ≤ 1000, is the number of solutions maximised?
+    """
+    solutions = {key: 0 for key in list(range(1, numbers * 5))}
+
+    for a in range(1, numbers):  # 1,
+        for b in range(a, numbers):
+            c = math.sqrt(a**2 + b**2)
+            if c % 1 != 0:
+                continue
+            c = int(c)
+
+            perimeter = a + b + c
+
+            if perimeter > 1000:
+                continue
+
+            solutions[perimeter] += 1
+
+    most_solutions = 0
+
+    for key, value in solutions.items():
+        if value != 0:
+            if value > most_solutions:
+
+                most_solutions = value
+                output = key
+
+    return output
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    test = problem_thirty_eight()
+    test = problem_thirty_nine(25)
 
     end = time.time()
     runtime = end - start
