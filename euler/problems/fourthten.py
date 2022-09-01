@@ -236,10 +236,61 @@ def problem_thirty_seven(numbers: int) -> int:
     return sum(trunc)
 
 
+def problem_thirty_eight() -> int:
+    """
+    What is the largest 1 to 9 pandigital 9-digit number that can be formed
+    as the concatenated product of an integer with (1,2, ... , n) where n > 1?
+    """
+    pand = []
+
+    number = 2
+    integer = 1
+
+    product_length = ""
+
+    while number < 10000:
+
+        if len(product_length) < 9:
+            if "0" in product_length:
+                number += 1
+                product_length = ""
+                integer = 1
+            else:
+                product = number * integer
+                product_length += str(product)
+                integer += 1
+
+        if len(product_length) > 9:
+            number += 1
+            product_length = ""
+            integer = 1
+
+        if len(product_length) == 9:
+            if "0" in product_length:
+                number += 1
+                product_length = ""
+                integer = 1
+            else:
+                list_num = []
+                for z in product_length:
+                    list_num.append(z)
+                length = list(set(list_num))
+                if len(length) == 9:
+                    pand.append(product_length)
+                    number += 1
+                    product_length = ""
+                else:
+                    number += 1
+                    product_length = ""
+                    integer = 1
+
+    return int(max(pand))
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    test = problem_thirty_seven(1000000)
+    test = problem_thirty_eight()
 
     end = time.time()
     runtime = end - start
