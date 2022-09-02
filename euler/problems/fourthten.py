@@ -1,9 +1,8 @@
-"""Project Euler: Problems 30-39"""
+"""Project Euler: Problems 31-40"""
 
 from euler import helper, prime
 
 import math
-import itertools
 import time
 
 import numpy as np
