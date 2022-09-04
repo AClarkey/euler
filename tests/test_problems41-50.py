@@ -11,3 +11,10 @@ def test_problem_41():
     actual = problems41to50.problem_41(1001)
     expected_result = 4231
     assert actual == expected_result
+
+
+def test_problem_42():
+    """testing test_problem_41"""
+    actual = problems41to50.problem_42("p042_words.txt")
+    expected_result = 162
+    assert actual == expected_result

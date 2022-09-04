@@ -54,6 +54,13 @@ def base_conversion(base: int, number: int) -> int:
     return int(output)
 
 
+def triangle_numbers(num: int) -> int:
+    """returns n numbers as boolean up to a given number"""
+    triangle = [int(0.5 * i * (i + 1)) for i in range(1, num + 1)]
+
+    return triangle
+
+
 if __name__ == "__main__":
-    test = base_conversion(7, 100)
+    test = triangle_numbers(10)
     print(test)

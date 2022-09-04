@@ -33,3 +33,10 @@ def test_base_conversion(base, number, expected_result):
     """Ensure multiple bases convert correctly"""
     actual = helper.base_conversion(base, number)
     assert actual == expected_result
+
+
+def test_triangle_numbers():
+    """Ensure multiple bases convert correctly"""
+    actual = helper.triangle_numbers(10)
+    expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
+    assert actual == expected
