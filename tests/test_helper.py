@@ -40,3 +40,10 @@ def test_triangle_numbers():
     actual = helper.triangle_numbers(10)
     expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
     assert actual == expected
+
+
+def test_is_pentagonal_number():
+    """Ensure multiple bases convert correctly"""
+    actual = helper.is_pentagonal_number(145)
+    expected = (True, 10)
+    assert actual == expected

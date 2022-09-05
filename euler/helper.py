@@ -1,5 +1,7 @@
 """helper functions so support Euler problems"""
 
+import math
+
 
 def simplify_fraction(input: tuple) -> tuple:
     """simply a fraction to return lowest terms possible"""
@@ -61,6 +63,19 @@ def triangle_numbers(num: int) -> int:
     return triangle
 
 
+def is_pentagonal_number(number: int) -> int:
+    """returns True if pentagonal numbers"""
+
+    value = (math.sqrt(24 * number + 1) + 1) / 6
+
+    if value.is_integer():
+        return True, int(value)
+    else:
+        return False, None
+
+    return value.is_integer(), value
+
+
 if __name__ == "__main__":
-    test = triangle_numbers(10)
+    test = is_pentagonal_number(145)
     print(test)
