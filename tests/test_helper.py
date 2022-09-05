@@ -36,14 +36,14 @@ def test_base_conversion(base, number, expected_result):
 
 
 def test_triangle_numbers():
-    """Ensure multiple bases convert correctly"""
+    """returns triangle_numbers"""
     actual = helper.triangle_numbers(10)
     expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
     assert actual == expected
 
 
 def test_is_pentagonal_number():
-    """Ensure multiple bases convert correctly"""
+    """test of pentagonal"""
     actual = helper.is_pentagonal_number(145)
-    expected = (True, 10)
+    expected = True
     assert actual == expected

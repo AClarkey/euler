@@ -66,14 +66,7 @@ def triangle_numbers(num: int) -> int:
 def is_pentagonal_number(number: int) -> int:
     """returns True if pentagonal numbers"""
 
-    value = (math.sqrt(24 * number + 1) + 1) / 6
-
-    if value.is_integer():
-        return True, int(value)
-    else:
-        return False, None
-
-    return value.is_integer(), value
+    return bool((math.sqrt(24 * number + 1) + 1) % 6 == 0)
 
 
 if __name__ == "__main__":
