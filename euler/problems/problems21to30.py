@@ -1,13 +1,9 @@
 """Project Euler: Problems 21-30"""
 import math
-from decimal import Decimal, getcontext
 
 import re
-import numpy as np
-import csv
-import string
 import itertools
-import copy
+import string
 
 
 from euler import prime

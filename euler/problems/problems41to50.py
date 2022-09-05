@@ -1,12 +1,9 @@
 """Project Euler: Problems 41 to 50"""
-
-from euler import helper, prime
-
-import math
 import time
 import string
 
-import numpy as np
+
+from euler import helper, prime
 
 
 def problem_41(start: int) -> int:

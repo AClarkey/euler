@@ -1,9 +1,8 @@
 """Tests for thirdten problems"""
+import pytest
+
 
 from euler.problems import problems41to50
-
-import numpy as np
-import pytest
 
 
 def test_problem_41():

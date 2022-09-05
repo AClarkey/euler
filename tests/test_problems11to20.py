@@ -1,9 +1,8 @@
 """Tests for secondten problems"""
-
-from euler.problems import secondten
-
 import numpy as np
 import pytest
+
+from euler.problems import problems11to20
 
 
 def test_problem_eleven():
@@ -32,7 +31,7 @@ def test_problem_eleven():
     test_data = np.array(
         [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]
     )
-    actual = secondten.problem_eleven(test_data, 4)
+    actual = problems11to20.problem_eleven(test_data, 4)
     expected = 43680
     assert actual == expected
 
@@ -40,13 +39,13 @@ def test_problem_eleven():
 @pytest.mark.parametrize("test_input, expected", [(100, 73920), (50, 25200), (8, 36)])
 def test_problem_twelve(test_input, expected):
     """testing problem_twelve"""
-    actual, divisors = secondten.problem_twelve(test_input)
+    actual, divisors = problems11to20.problem_twelve(test_input)
     assert actual == expected
 
 
 def test_problem_thirteen():
     """testing problem_thirteen"""
-    actual = secondten.problem_thirteen(10)
+    actual = problems11to20.problem_thirteen(10)
     expected = 5537376230
     assert int(actual) == expected
 
@@ -54,47 +53,47 @@ def test_problem_thirteen():
 @pytest.mark.parametrize("test_input, expected", [(10, 9), (100, 97), (1000, 871)])
 def test_problem_fourteen(test_input, expected):
     """testing problem_fourteen"""
-    length, actual = secondten.problem_fourteen(test_input)
+    length, actual = problems11to20.problem_fourteen(test_input)
     assert int(actual) == expected
 
 
 def test_problem_fifteen():
     """testing problem_fifteen"""
-    actual = secondten.problem_fifteen(14, 7)
+    actual = problems11to20.problem_fifteen(14, 7)
     expected = 3432
     assert actual == expected
 
 
 def test_problem_sixteen():
     """testing problem_sixteen"""
-    actual = secondten.problem_sixteen(100)
+    actual = problems11to20.problem_sixteen(100)
     expected = 115
     assert actual == expected
 
 
 def test_problem_seventeen():
     """testing problem_seventeen"""
-    actual = secondten.problem_seventeen(100)
+    actual = problems11to20.problem_seventeen(100)
     expected = 864
     assert actual == expected
 
 
 def test_problem_eighteen():
     """testing problem_eighteen"""
-    actual = secondten.problem_eighteen()
+    actual = problems11to20.problem_eighteen()
     expected = 1074
     assert actual == expected
 
 
 def test_problem_nineteen():
     """testing problem_nineteen"""
-    actual = secondten.problem_nineteen(1900, 2000, 1901)
+    actual = problems11to20.problem_nineteen(1900, 2000, 1901)
     expected = 171
     assert actual == expected
 
 
 def test_problem_twenty():
     """testing problem_twenty"""
-    actual = secondten.problem_twenty(10)
+    actual = problems11to20.problem_twenty(10)
     expected = 27
     assert actual == expected

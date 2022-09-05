@@ -1,7 +1,7 @@
 """Project Euler: Problems 1-10"""
-from euler import prime
-
 import math
+
+from euler import prime
 
 
 def problem_one(num):
