@@ -44,6 +44,20 @@ def test_triangle_numbers():
 
 def test_is_pentagonal_number():
     """test of pentagonal"""
-    actual = helper.is_pentagonal_number(145)
+    actual = helper.is_pentagonal_number(40755)
+    expected = True
+    assert actual == expected
+
+
+def test_is_triangle_number():
+    """test of triangle"""
+    actual = helper.is_triangle_number(40755)
+    expected = True
+    assert actual == expected
+
+
+def test_is_hexagonal_number():
+    """test of hexagonal"""
+    actual = helper.is_hexagonal_number(40755)
     expected = True
     assert actual == expected
