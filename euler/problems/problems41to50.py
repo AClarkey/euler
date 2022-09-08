@@ -1,6 +1,7 @@
 """Project Euler: Problems 41 to 50"""
 import time
 import string
+import math
 
 
 from euler import helper, prime
@@ -163,10 +164,55 @@ def problem_45(start: int) -> int:
     return tri
 
 
+def problem_46():
+    """
+    It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
+
+    9 = 7 + 2×12
+    15 = 7 + 2×22
+    21 = 3 + 2×32
+    25 = 7 + 2×32
+    27 = 19 + 2×22
+    33 = 31 + 2×12
+
+    It turns out that the conjecture was false.
+
+    What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
+    """
+    primes = prime.eratosthenes_sieve_prime(10000)
+    primes_list = [i for i in range(1, 10000) if primes[i]]
+
+    def is_twice_square(number: int) -> int:
+        """checks if a number can be written as twice a square or not"""
+        return float.is_integer(math.sqrt(number / 2))
+
+    value = 9
+    while True:
+
+        if not primes[value]:
+
+            flag = False
+            primes_less = [i for i in primes_list if i < value]
+
+            for y in primes_less:
+                number = value - y
+
+                if is_twice_square(number):
+                    flag = True
+                    break
+
+            if not flag:
+                break
+
+        value += 2
+
+    return value
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_45(285)
+    answer = problem_46()
 
     end = time.time()
     runtime = end - start
