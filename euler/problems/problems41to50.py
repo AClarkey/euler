@@ -222,37 +222,74 @@ def problem_47(number: int) -> int:
     """
     i = 1
     flag = False
+    primes = prime.eratosthenes_sieve_prime(1000000)
+
     while True:
 
         factors_set = []
+        count = 0
+
+        if primes[i]:
+            i += 1
+            continue
 
         for y in range(i, i + number + 1):
 
-            factors = set(prime.prime_factors(y))
-            if len(factors) != number:
+            count += 1
+
+            if primes[y]:
                 break
 
-            for z in factors:
-                factors_set.append(z)
+            p_factors = prime.prime_factors(y)
 
-            if len(factors_set) == number**2:
-                output = y + 1 - number
+            if len(p_factors) < number:
+                break
+
+            dict = {y: p_factors.count(y) for y in set(p_factors)}
+
+            p_factors = []
+            for key, value in dict.items():
+                p_factors.append(key**value)
+
+            if len(p_factors) == number:
+                factors_set.append(p_factors)
+
+        if len(factors_set) == number:
+            distinct = []
+            for a in factors_set:
+                for b in a:
+                    distinct.append(b)
+
+            if len(set(distinct)) == number**2:
                 flag = True
+                print(i, factors_set)
                 break
 
-        if flag == True:
+        if flag:
             break
 
-        i += 1
+        i += count
 
-    return output
+    return i
+
+
+def problem_47b():
+    """alternative solution to above"""
+    for i in range(50000, 1000000):
+        if len(prime.distinct_prime_factors(i)) == 4:
+            if len(prime.distinct_prime_factors(i + 1)) == 4:
+                if len(prime.distinct_prime_factors(i + 2)) == 4:
+                    if len(prime.distinct_prime_factors(i + 3)) == 4:
+                        print(i)
+                        break
 
 
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_47(4)
+    answer = problem_47b()
 
+    # print(answer)
     end = time.time()
     runtime = end - start
     print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")

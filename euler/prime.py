@@ -26,27 +26,35 @@ def prime_factors(num: int) -> list:
     if num == 1:
         return []
 
-    output = []
-    prime_factor = 2
+    factors = []
+    c = 2
+    while num > 1:
 
-    while True:
-        if num == prime_factor:
-            output.append(prime_factor)
-            break
+        if num % c == 0:
+            factors.append(c)
+            num = num / c
+        else:
+            c = c + 1
+    return factors
 
-        while num % prime_factor == 0:
-            output.append(prime_factor)
-            num = num / prime_factor
 
-        prime_factor += 1
+def distinct_prime_factors(num: int) -> set:
+    """
+    Assume n is a positive natural number
 
-        while is_prime(prime_factor) is False:
-            prime_factor += 1
-
-        if prime_factor > num:
-            break
-
-    return output
+        returns a list of distinct prime factors of n
+    """
+    factors = set()
+    i = 2
+    while i * i <= num:
+        if num % i:
+            i += 1
+        else:
+            num //= i
+            factors.add(i)
+    if num > 1:
+        factors.add(num)
+    return factors
 
 
 def eratosthenes_sieve_prime(num):

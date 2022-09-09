@@ -45,3 +45,13 @@ def test_problem_46():
     actual = problems41to50.problem_46()
     expected_result = 5777
     assert actual == expected_result
+
+
+@pytest.mark.parametrize(
+    "length, expected_result",
+    [(2, 14), (3, 644)],
+)
+def test_problem_47(length, expected_result):
+    """testing test_problem_47"""
+    actual = problems41to50.problem_47(length)
+    assert actual == expected_result

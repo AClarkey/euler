@@ -40,6 +40,13 @@ def test_prime_factors():
     assert actual == expected
 
 
+def test_distinct_prime_factors():
+    """testing distinct_prime_factors function"""
+    actual = prime.distinct_prime_factors(16)
+    expected = {2}
+    assert actual == expected
+
+
 def test_eratosthenes_sieve_prime():
     """test eratosthenes_sieve"""
     actual = prime.eratosthenes_sieve_prime(10)
