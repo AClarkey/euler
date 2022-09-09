@@ -284,10 +284,24 @@ def problem_47b():
                         break
 
 
+def problem_48(number: int) -> int:
+    """
+    The series, 11 + 22 + 33 + ... + 1010 = 10405071317.
+
+    Find the last ten digits of the series, 11 + 22 + 33 + ... + 10001000.
+    """
+    output = 0
+    for i in range(1, number + 1):
+
+        output += i**i
+
+    return int(str(output)[-10:])
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_47b()
+    answer = problem_48(1000)
 
     # print(answer)
     end = time.time()
