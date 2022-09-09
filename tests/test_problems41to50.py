@@ -69,3 +69,13 @@ def test_problem_49():
     actual = problems41to50.problem_49()
     expected_result = ["148748178147", "296962999629"]
     assert actual == expected_result
+
+
+@pytest.mark.parametrize(
+    "length, expected_result",
+    [(100, 41), (1000, 953), (10000, 9521)],
+)
+def test_problem_50(length, expected_result):
+    """testing test_problem_50"""
+    actual = problems41to50.problem_50(length)
+    assert actual == expected_result

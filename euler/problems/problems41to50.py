@@ -324,10 +324,42 @@ def problem_49():
     return output
 
 
+def problem_50(upper: int) -> int:
+    """
+    The prime 41, can be written as the sum of six consecutive primes:
+    41 = 2 + 3 + 5 + 7 + 11 + 13
+    This is the longest sum of consecutive primes that adds to a prime below one-hundred.
+    The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
+    Which prime, below one-million, can be written as the sum of the most consecutive primes?
+    """
+
+    primes = prime.eratosthenes_sieve_prime(upper * 2)
+
+    output = 0
+    grand_total = 0
+
+    for i in range(2, 32):
+        if primes[i]:
+            y = i
+            counter = 0
+            total = 0
+            while total < upper:
+                if primes[y]:
+                    total += y
+                    counter += 1
+                    if primes[total]:
+                        if counter > output and total < upper:
+                            output = counter
+                            grand_total = total
+                y += 1
+
+    return grand_total
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_49()
+    answer = problem_50(10000)
 
     # print(answer)
     end = time.time()
