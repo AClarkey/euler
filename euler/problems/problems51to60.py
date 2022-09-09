@@ -25,30 +25,25 @@ def problem_51():
     Find the smallest prime which, by replacing part of the number
     (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
     """
-    primes = prime.eratosthenes_sieve_prime(1000)
+    primes = prime.eratosthenes_sieve_prime(100000)
 
-    choose = itertools.combinations(range(2), 1)
-    # print(next(choose))
-    # print(next(choose))
-
+    choose = itertools.combinations(range(5), 2)
     max = 0
 
     for i in choose:
-        common = []
-        for y in range(10, 100):
+        for y in range(56000, 57000):
             if primes[y]:
-                for a in i:
-                    # needs to be tweaked so all the indexes in the specific i are removed, not just one at a time.
-                    temp = list(str(y))
-                    temp[a] = ""
-                    test = "".join(temp)
-                    common.append(test)
+                common = []
 
-                most_common = mode(common)
-                counter = common.count(most_common)
-                if counter > max:
-                    max = counter
-                    print(i, most_common, counter)
+                for b in range(0, 10):
+                    temp = list(str(y))
+                    for a in i:
+                        temp[a] = str(b)
+                    if primes[int("".join(temp))]:
+                        common.append("".join(temp))
+                if len(common) == 7:
+                    print("DONE", y, i)
+                    break
 
 
 if __name__ == "__main__":
