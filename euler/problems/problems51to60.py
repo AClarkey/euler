@@ -11,7 +11,7 @@ from statistics import mode
 from euler import helper, prime
 
 
-def problem_51():
+def problem_51(length: int, choose: int, target: int):
     """
     By replacing the 1st digit of the 2-digit number *3, it turns out that
     six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
@@ -25,13 +25,16 @@ def problem_51():
     Find the smallest prime which, by replacing part of the number
     (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
     """
-    primes = prime.eratosthenes_sieve_prime(100000)
+    upper = 10 ** (length)
+    lower = upper // 10
 
-    choose = itertools.combinations(range(5), 2)
+    primes = prime.eratosthenes_sieve_prime(upper)
+
+    choose = itertools.combinations(range(length), choose)
     max = 0
 
     for i in choose:
-        for y in range(56000, 57000):
+        for y in range(lower, upper):
             if primes[y]:
                 common = []
 
@@ -41,16 +44,19 @@ def problem_51():
                         temp[a] = str(b)
                     if primes[int("".join(temp))]:
                         common.append("".join(temp))
-                if len(common) == 7:
-                    print("DONE", y, i)
+
+                if len(common) == target:
+                    if common[0][1] != "0":
+                        output = common[0]
                     break
+    return output
 
 
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
-    problem_51()
+    answer = problem_51(6, 3, 8)
 
-    # end = time.time()
-    # runtime = end - start
-    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
