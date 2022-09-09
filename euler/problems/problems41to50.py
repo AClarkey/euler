@@ -298,10 +298,36 @@ def problem_48(number: int) -> int:
     return int(str(output)[-10:])
 
 
+def problem_49():
+    """
+    The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases by 3330,
+    is unusual in two ways: (i) each of the three terms are prime, and, (ii) each of the
+    4-digit numbers are permutations of one another.
+    There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, exhibiting
+    this property, but there is one other 4-digit increasing sequence.
+    What 12-digit number do you form by concatenating the three terms in this sequence?
+    """
+
+    primes = prime.eratosthenes_sieve_prime(11000)
+
+    output = []
+    for a in range(1000, 3400):
+        b = a + 3330
+        c = a + 6660
+        if primes[a] and primes[b] and primes[c]:
+            counter = 0
+            for y in str(a):
+                if y in str(b) and y in str(c):
+                    counter += 1
+                if counter == 4:
+                    output.append(str(a) + str(b) + str(c))
+    return output
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_48(1000)
+    answer = problem_49()
 
     # print(answer)
     end = time.time()
