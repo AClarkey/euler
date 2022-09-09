@@ -359,9 +359,8 @@ def problem_50(upper: int) -> int:
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_50(10000)
+    answer = problem_50(100)
 
-    # print(answer)
     end = time.time()
     runtime = end - start
     print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
