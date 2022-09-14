@@ -99,11 +99,93 @@ def problem_53():
     return count
 
 
+def problem_54(filename: str) -> int:
+    """
+    The file, poker.txt, contains one-thousand random hands dealt to two players.
+    Each line of the file contains ten cards (separated by a single space):
+    the first five are Player 1's cards and the last five are Player 2's cards.
+    You can assume that all hands are valid (no invalid characters or repeated cards),
+    each player's hand is in no specific order, and in each hand there is a clear winner.
+    How many hands does Player 1 win?
+    """
+
+    list_of_hands = []
+
+    with open(f"./data/{filename}", "r", encoding="utf-8") as file:
+        for line in file:
+            list_of_hands.append(line.strip().split(" "))
+
+    deck_suits = ["S", "C", "D", "H"]
+    deck_cards = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+
+    def hand_value(hand: list) -> int:
+        """determine value of a hand"""
+
+        def hand_flush(hand: list) -> bool:
+            """T/F if flush"""
+            suits = {"".join(hand)[i] for i in range(1, 10, 2)}
+            if len(suits) == 1:
+                return True
+            return False
+
+        def hand_rank(hand: list) -> int:
+
+            hand_value = {
+                "High Card": None,
+                "One Pair": None,
+                "Two Pairs": None,
+                "Three of a Kind": None,
+                "Straight": None,
+                "Flush": None,
+                "Full House": None,
+                "Four of a Kind": None,
+                "Straight Flush": None,
+                "Royal Flush": None,
+            }
+
+            if hand_flush(hand):
+                hand_value["Flush"] = True
+
+            cards = ["".join(hand)[i] for i in range(0, 10, 2)]
+            pair_counter = 0
+
+            for i in cards:
+                count = cards.count(i)
+                if count == 2:
+                    if pair_counter > 0:
+                        hand_value["Two Pairs"] = deck_cards.index(i)
+                    else:
+                        hand_value["One Pair"] = deck_cards.index(i)
+                    pair_counter += 1
+
+                if count == 3:
+                    hand_value["Three of a Kind"].index(i)
+
+                if count == 4:
+                    hand_value["Four of a Kind"].index(i)
+
+            for value in reversed(hand_value.values()):
+                if value != None:
+                    print(value)
+                    break
+
+            # print(cards)
+
+        hand_rank(hand)
+
+    for i in list_of_hands[1:2]:
+        p1_hand = i[0:5]
+        p2_hand = i[5:10]
+
+        hand_value(p1_hand)
+        hand_value(p2_hand)
+
+
 if __name__ == "__main__":
-    start = time.time()
+    # start = time.time()
 
-    answer = problem_53()
+    answer = problem_54("p054_poker.txt")
 
-    end = time.time()
-    runtime = end - start
-    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    # end = time.time()
+    # runtime = end - start
+    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
