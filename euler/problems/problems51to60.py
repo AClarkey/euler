@@ -52,10 +52,37 @@ def problem_51(length: int, choose: int, target: int):
     return output
 
 
+def problem_52(factors: int) -> int:
+    """
+    It can be seen that the number, 125874, and its double, 251748,
+    contain exactly the same digits, but in a different order.
+    Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+    """
+
+    def list_of_digits(num: int) -> list:
+        """returns a list of digits"""
+        digits = list(str(num))
+        digits.sort()
+        return digits
+
+    n = 1
+    while True:
+        flag = True
+        for i in range(2, factors + 1):
+            if list_of_digits(n) != list_of_digits(n * i):
+                flag = False
+                break
+        if flag:
+            break
+        n += 1
+
+    return n
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_51(6, 3, 8)
+    answer = problem_52(6)
 
     end = time.time()
     runtime = end - start
