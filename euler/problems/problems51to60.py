@@ -6,6 +6,7 @@ import itertools
 
 import statistics
 from statistics import mode
+from tkinter.filedialog import test
 
 
 from euler import helper, prime
@@ -79,10 +80,29 @@ def problem_52(factors: int) -> int:
     return n
 
 
+def problem_53():
+    """
+    How many, not necessarily distinct, values of (n / r) for 1<=n<=100, are greater than one-million?
+    """
+
+    def num_combinations(items: int, choose: int) -> int:
+        """calcs number of combinations"""
+        return math.factorial(items) // (
+            math.factorial(choose) * (math.factorial(items - choose))
+        )
+
+    count = 0
+    for i in range(1, 101):
+        for y in range(1, i):
+            if num_combinations(i, y) > 1000000:
+                count += 1
+    return count
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_52(6)
+    answer = problem_53()
 
     end = time.time()
     runtime = end - start
