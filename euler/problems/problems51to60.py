@@ -115,70 +115,104 @@ def problem_54(filename: str) -> int:
         for line in file:
             list_of_hands.append(line.strip().split(" "))
 
-    deck_suits = ["S", "C", "D", "H"]
-    deck_cards = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+    deck_suits = ("S", "C", "D", "H")
+    deck_cards = ("2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A")
 
     def hand_value(hand: list) -> int:
         """determine value of a hand"""
 
-        def hand_flush(hand: list) -> bool:
-            """T/F if flush"""
-            suits = {"".join(hand)[i] for i in range(1, 10, 2)}
-            if len(suits) == 1:
-                return True
-            return False
+        final_hand = {
+            0: None,  # "High Card"         DONE, suit buggy
+            1: None,  # "One Pair"          DONE, suit buggy
+            2: None,  # "Two Pairs"         DONE, suit buggy
+            3: None,  # "Three of a Kind"   DONE
+            4: None,  # "Straight"          DONE
+            5: None,  # "Flush"             DONE
+            6: None,  # "Full House"        DONE
+            7: None,  # "Four of a Kind"    DONE
+            8: None,  # "Straight Flush"    DONE
+            9: None,  # "Royal Flush"       DONE
+        }
 
-        def hand_rank(hand: list) -> int:
+        cards = ["".join(hand)[i] for i in range(0, 10, 2)]
+        suits = ["".join(hand)[i] for i in range(1, 10, 2)]
 
-            hand_value = {
-                "High Card": None,
-                "One Pair": None,
-                "Two Pairs": None,
-                "Three of a Kind": None,
-                "Straight": None,
-                "Flush": None,
-                "Full House": None,
-                "Four of a Kind": None,
-                "Straight Flush": None,
-                "Royal Flush": None,
-            }
+        # ONE, TWO PAIR, THREE, FOUR of a kind
+        pair_counter = 0
+        for i in hand:
+            count = cards.count(i[0])
+            if count == 2:
+                if pair_counter > 1:
+                    final_hand[2] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                else:
+                    final_hand[1] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                pair_counter += 1
 
-            if hand_flush(hand):
-                hand_value["Flush"] = True
+            if count == 3:
+                final_hand[3] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
 
-            cards = ["".join(hand)[i] for i in range(0, 10, 2)]
-            pair_counter = 0
+            if count == 4:
+                final_hand[7] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
 
-            for i in cards:
-                count = cards.count(i)
-                if count == 2:
-                    if pair_counter > 0:
-                        hand_value["Two Pairs"] = deck_cards.index(i)
-                    else:
-                        hand_value["One Pair"] = deck_cards.index(i)
-                    pair_counter += 1
+        # STRAIGHT
+        card_ranks = [deck_cards.index(i) for i in cards]
+        card_ranks.sort()
+        start = card_ranks[0]
+        straight = True
+        for i in card_ranks[1:5]:
+            if i - start != 1 or i - start != 12:
+                straight = False
+        if straight:
+            final_hand[4] = (card_ranks[-1], None)
 
-                if count == 3:
-                    hand_value["Three of a Kind"].index(i)
+        # FLUSH
+        if len(set(suits)) == 1:
+            final_hand[5] = (True, deck_suits.index(hand[0][1]))
 
-                if count == 4:
-                    hand_value["Four of a Kind"].index(i)
+        # FULLHOUSE
+        if final_hand[1] is not None and final_hand[3] is not None:
+            final_hand[6] = final_hand[3]
 
-            for value in reversed(hand_value.values()):
-                if value != None:
-                    print(value)
-                    break
+        # STRAIGHT FLUSH
+        if final_hand[4] is not None and final_hand[5] is not None:
+            final_hand[8] = (final_hand[4][0], final_hand[5][1])
 
-            # print(cards)
+        # STRAIGHT FLUSH
+        if final_hand[8] is not None:
+            if final_hand[8][0] == 12:
+                final_hand[9] = final_hand[8]
 
-        hand_rank(hand)
+        # HIGH CARD
+        for key, value in reversed(final_hand.items()):
+            if value != None:
+                break
+            if key == 0:
+                print(card_ranks[-1], deck_cards[card_ranks[-1]])
+                final_hand[0] = (card_ranks[-1], None)
 
-    for i in list_of_hands[1:2]:
+        # FINAL
+        for key, value in reversed(final_hand.items()):
+            if value != None:
+                return (key, value)
+
+    def who_wins(one_value: tuple, two_value: tuple) -> str:
+        # print(one_value, two_value)
+        if one_value[0] > two_value[0]:
+            return "P1"
+        if one_value[0] == two_value[0]:
+            if one_value[1][0] > two_value[1][0]:
+                return "P1"
+            elif one_value[1][0] < two_value[1][0]:
+                return "P2"
+            else:
+                return "Tied hands"
+        return "P2"
+
+    for i in list_of_hands[0:1]:
         p1_hand = i[0:5]
         p2_hand = i[5:10]
-
-        hand_value(p1_hand)
-        hand_value(p2_hand)
+        outcome = who_wins(hand_value(p1_hand), hand_value(p2_hand))
+        print(p1_hand, hand_value(p1_hand), p2_hand, hand_value(p2_hand), outcome)
 
 
 if __name__ == "__main__":
