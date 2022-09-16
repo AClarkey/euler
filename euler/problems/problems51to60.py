@@ -115,111 +115,136 @@ def problem_54(filename: str) -> int:
         for line in file:
             list_of_hands.append(line.strip().split(" "))
 
-    deck_suits = ("S", "C", "D", "H")
     deck_cards = ("2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A")
 
     def hand_value(hand: list) -> int:
         """determine value of a hand"""
 
         final_hand = {
-            0: None,  # "High Card"         DONE, suit buggy
-            1: None,  # "One Pair"          DONE, suit buggy
-            2: None,  # "Two Pairs"         DONE, suit buggy
-            3: None,  # "Three of a Kind"   DONE
-            4: None,  # "Straight"          DONE
-            5: None,  # "Flush"             DONE
-            6: None,  # "Full House"        DONE
-            7: None,  # "Four of a Kind"    DONE
-            8: None,  # "Straight Flush"    DONE
-            9: None,  # "Royal Flush"       DONE
+            0: None,  # "High Card"
+            1: None,  # "One Pair"
+            2: None,  # "Two Pairs"
+            3: None,  # "Three of a Kind"
+            4: None,  # "Straight"
+            5: None,  # "Flush"
+            6: None,  # "Full House"
+            7: None,  # "Four of a Kind"
+            8: None,  # "Straight Flush"
+            9: None,  # "Royal Flush"
         }
 
-        cards = ["".join(hand)[i] for i in range(0, 10, 2)]
+        cards = [deck_cards.index("".join(hand)[i]) for i in range(0, 10, 2)]
+        cards.sort()
         suits = ["".join(hand)[i] for i in range(1, 10, 2)]
 
         # ONE, TWO PAIR, THREE, FOUR of a kind
         pair_counter = 0
-        for i in hand:
-            count = cards.count(i[0])
+        for i in cards:
+            count = cards.count(i)
             if count == 2:
                 if pair_counter > 1:
-                    final_hand[2] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                    final_hand[2] = i
                 else:
-                    final_hand[1] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                    final_hand[1] = i
                 pair_counter += 1
 
             if count == 3:
-                final_hand[3] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                final_hand[3] = i
 
             if count == 4:
-                final_hand[7] = (deck_cards.index(i[0]), deck_suits.index(i[1]))
+                final_hand[7] = i
 
         # STRAIGHT
-        card_ranks = [deck_cards.index(i) for i in cards]
-        card_ranks.sort()
-        start = card_ranks[0]
+        start = cards[0]
         straight = True
-        for i in card_ranks[1:5]:
-            if i - start != 1 or i - start != 12:
+        for i in cards[1:5]:
+            if i - start != 1:
                 straight = False
+                break
+            else:
+                start = i
+
         if straight:
-            final_hand[4] = (card_ranks[-1], None)
+            final_hand[4] = cards[-1]
 
         # FLUSH
         if len(set(suits)) == 1:
-            final_hand[5] = (True, deck_suits.index(hand[0][1]))
+            final_hand[5] = cards[-1]
 
         # FULLHOUSE
         if final_hand[1] is not None and final_hand[3] is not None:
             final_hand[6] = final_hand[3]
 
         # STRAIGHT FLUSH
-        if final_hand[4] is not None and final_hand[5] is not None:
-            final_hand[8] = (final_hand[4][0], final_hand[5][1])
+        if final_hand[4] is not None and final_hand[5]:
+            final_hand[8] = final_hand[4]
 
         # STRAIGHT FLUSH
         if final_hand[8] is not None:
-            if final_hand[8][0] == 12:
+            if final_hand[8] == 12:
                 final_hand[9] = final_hand[8]
 
         # HIGH CARD
         for key, value in reversed(final_hand.items()):
-            if value != None:
+            if value is not None:
                 break
             if key == 0:
-                print(card_ranks[-1], deck_cards[card_ranks[-1]])
-                final_hand[0] = (card_ranks[-1], None)
+                final_hand[0] = cards[-1]
 
         # FINAL
         for key, value in reversed(final_hand.items()):
-            if value != None:
-                return (key, value)
+            if value is not None:
+                return [key, value, cards, final_hand]
+
+    def highest_card(cards_one: list, cards_two: list) -> str:
+        """returns who has highest card to resolve tie"""
+
+        for i in reversed(range(5)):
+            if cards_one[i] > cards_two[i]:
+                return "P1"
+            if cards_one[i] < cards_two[i]:
+                return "P2"
+
+        return "Tied hands"
 
     def who_wins(one_value: tuple, two_value: tuple) -> str:
-        # print(one_value, two_value)
+        # HAND VALUE
         if one_value[0] > two_value[0]:
             return "P1"
-        if one_value[0] == two_value[0]:
-            if one_value[1][0] > two_value[1][0]:
+        elif one_value[0] < two_value[0]:
+            return "P2"
+        else:
+            # CARD VALUE ON SAME HAND
+            if one_value[1] > two_value[1]:
                 return "P1"
-            elif one_value[1][0] < two_value[1][0]:
+            elif one_value[1] < two_value[1]:
                 return "P2"
+            elif one_value[0] == 2:
+                if one_value[3][1] > two_value[3][1]:
+                    return "P1"
+                elif one_value[3][1] < two_value[3][1]:
+                    return "P2"
+                else:
+                    return highest_card(one_value[2], two_value[2])
             else:
-                return "Tied hands"
-        return "P2"
+                return highest_card(one_value[2], two_value[2])
 
-    for i in list_of_hands[0:1]:
+    counter = 0
+    for i in list_of_hands:
         p1_hand = i[0:5]
         p2_hand = i[5:10]
         outcome = who_wins(hand_value(p1_hand), hand_value(p2_hand))
-        print(p1_hand, hand_value(p1_hand), p2_hand, hand_value(p2_hand), outcome)
+        if outcome == "P1":
+            counter += 1
+
+    return counter
 
 
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
     answer = problem_54("p054_poker.txt")
 
-    # end = time.time()
-    # runtime = end - start
-    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")

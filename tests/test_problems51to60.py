@@ -24,3 +24,10 @@ def test_problem_53():
     actual = problems51to60.problem_53()
     expected_result = 4075
     assert actual == expected_result
+
+
+def test_problem_54():
+    """testing test_problem_54"""
+    actual = problems51to60.problem_54("p054_poker.txt")
+    expected_result = 376
+    assert actual == expected_result
