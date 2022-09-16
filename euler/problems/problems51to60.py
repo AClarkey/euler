@@ -287,11 +287,31 @@ def problem_56(num: int) -> int:
     return max
 
 
+def problem_57(num: int) -> int:
+    """
+    for sqrt(2),
+    In the first one-thousand expansions, how many fractions contain a numerator with more digits than the denominator?
+    """
+
+    def into_fraction(num: float) -> tuple:
+        denom = 1
+        numer = num
+        while not float.is_integer(numer):
+            denom += 1
+            numer = num * denom
+        return (int(numer), denom)
+
+    root = 2
+    next = 1393 / 985
+
+    print(next, type(next), into_fraction(next))
+
+
 if __name__ == "__main__":
-    start = time.time()
+    # start = time.time()
 
-    answer = problem_56(100)
+    answer = problem_57(100)
 
-    end = time.time()
-    runtime = end - start
-    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    # end = time.time()
+    # runtime = end - start
+    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
