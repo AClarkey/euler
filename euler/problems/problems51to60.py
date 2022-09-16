@@ -262,12 +262,36 @@ def problem_55(start: int, end: int) -> int:
     return lychrel
 
 
+def problem_56(num: int) -> int:
+    """
+    A googol (10100) is a massive number: one followed by one-hundred zeros; 100100 is almost
+    unimaginably large: one followed by two-hundred zeros. Despite their size, the sum of the
+    digits in each number is only 1.
+    Considering natural numbers of the form, ab, where a, b < 100, what is the maximum digital sum?
+    """
+
+    def digit_sum(n: int) -> int:
+        """sum of digits"""
+        sum = 0
+        for i in str(n):
+            sum += int(i)
+        return sum
+
+    max = 0
+    for i in range(num):
+        for y in range(num):
+            value = digit_sum(i**y)
+            if value > max:
+                max = value
+
+    return max
+
+
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
-    answer = problem_55(0, 10000)
-    print(answer)
+    answer = problem_56(100)
 
-    # end = time.time()
-    # runtime = end - start
-    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
