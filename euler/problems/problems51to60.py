@@ -155,14 +155,13 @@ def problem_54(filename: str) -> int:
                 final_hand[7] = i
 
         # STRAIGHT
-        start = cards[0]
+        begin = cards[0]
         straight = True
         for i in cards[1:5]:
-            if i - start != 1:
+            if i - begin != 1:
                 straight = False
                 break
-            else:
-                start = i
+            begin = i
 
         if straight:
             final_hand[4] = cards[-1]
@@ -240,11 +239,35 @@ def problem_54(filename: str) -> int:
     return counter
 
 
+def problem_55(start: int, end: int) -> int:
+    """
+    How many Lychrel numbers are there below ten-thousand?
+    """
+    lychrel = 0
+
+    def is_lychrel(num: int):
+        """
+        T/F lychrel
+        """
+        for i in range(50):
+            num += int(str(num)[::-1])
+            if str(num) == str(num)[::-1]:
+                return False
+        return True
+
+    for i in range(start, end):
+        if is_lychrel(i):
+            lychrel += 1
+
+    return lychrel
+
+
 if __name__ == "__main__":
-    start = time.time()
+    # start = time.time()
 
-    answer = problem_54("p054_poker.txt")
+    answer = problem_55(0, 10000)
+    print(answer)
 
-    end = time.time()
-    runtime = end - start
-    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    # end = time.time()
+    # runtime = end - start
+    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
