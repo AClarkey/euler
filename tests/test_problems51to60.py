@@ -45,3 +45,10 @@ def test_problem_56():
     actual = problems51to60.problem_56(100)
     expected_result = 972
     assert actual == expected_result
+
+
+def test_problem_57():
+    """testing test_problem_57"""
+    actual = problems51to60.problem_57(100)
+    expected_result = 15
+    assert actual == expected_result

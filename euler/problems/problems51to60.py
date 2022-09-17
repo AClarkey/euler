@@ -293,25 +293,41 @@ def problem_57(num: int) -> int:
     In the first one-thousand expansions, how many fractions contain a numerator with more digits than the denominator?
     """
 
-    def into_fraction(num: float) -> tuple:
-        denom = 1
-        numer = num
-        while not float.is_integer(numer):
-            denom += 1
-            numer = num * denom
-        return (int(numer), denom)
+    def root_two_iter(iter: num) -> tuple:
+        """return numer/denom of sqtr 2 continued fraction"""
+        if iter == 1:
+            return (3, 2)
+        if iter == 2:
+            return (7, 5)
+        numer_old = 3
+        denom_old = 2
+        numer = 7
+        denom = 5
+        for i in range(2, iter):
+            numer_new = numer * 2 + numer_old
+            denom_new = denom * 2 + denom_old
 
-    root = 2
-    next = 1393 / 985
+            numer_old = numer
+            denom_old = denom
 
-    print(next, type(next), into_fraction(next))
+            numer = numer_new
+            denom = denom_new
+        return (numer_new, denom_new)
+
+    output = 0
+    for i in range(1, num + 1):
+        value = root_two_iter(i)
+        if len(str(value[0])) > len(str(value[1])):
+            output += 1
+
+    return output
 
 
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
     answer = problem_57(100)
 
-    # end = time.time()
-    # runtime = end - start
-    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
