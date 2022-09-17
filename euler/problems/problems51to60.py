@@ -331,19 +331,19 @@ def problem_58(number: float) -> int:
     """
     total = 1
     counter = 0
-    size = 1
+    side = 1
     ratio = 1.0
 
     while ratio > number:
-        size += 2
+        side += 2
         for y in range(4):
-            value = size * size - (y * (size - 1))
+            value = side * side - (y * (side - 1))
             if prime.is_prime(value):
                 counter += 1
             total += 1
         ratio = counter / total
 
-    return size
+    return side
 
 
 if __name__ == "__main__":
