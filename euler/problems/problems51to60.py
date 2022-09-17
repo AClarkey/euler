@@ -323,10 +323,33 @@ def problem_57(num: int) -> int:
     return output
 
 
+def problem_58(number: float) -> int:
+    """If one complete new layer is wrapped around the spiral above,
+    a square spiral with side length 9 will be formed. If this process is continued,
+    what is the side length of the square spiral for which the ratio of primes
+    along both diagonals first falls below 10%?
+    """
+    total = 1
+    counter = 0
+    size = 1
+    ratio = 1.0
+
+    while ratio > number:
+        size += 2
+        for y in range(4):
+            value = size * size - (y * (size - 1))
+            if prime.is_prime(value):
+                counter += 1
+            total += 1
+        ratio = counter / total
+
+    return size
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_57(100)
+    answer = problem_58(0.2)
 
     end = time.time()
     runtime = end - start
