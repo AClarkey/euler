@@ -346,11 +346,43 @@ def problem_58(number: float) -> int:
     return side
 
 
+def problem_59(filename: str):
+    """"""
+
+    with open(f"./data/{filename}", "r", encoding="UTF-8") as file:
+        input = file.read().split(",")
+
+    for i in input[1:2]:
+        for y in string.ascii_lowercase:
+
+            ascii_encrypt = int(i)
+            secret = ord(y)
+            value = ascii_encrypt ^ secret
+            print(ascii_encrypt, secret, chr(secret), value, chr(value))
+
+            # print(ord(y))
+            # print(chr(int(i)))
+
+    # original = 21
+    # password = "A"
+
+    # print(original ^ password)
+    # print(58 ^ password)
+
+    #  input[0:1] - not a d, x, y, z
+    #  input[1:2] - not a d, x, y, z
+
+
 if __name__ == "__main__":
-    start = time.time()
+    # start = time.time()
 
-    answer = problem_58(0.2)
+    answer = problem_59("p059_cipher.txt")
 
-    end = time.time()
-    runtime = end - start
-    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    # value = 0
+    # for p in itertools.product(string.ascii_lowercase, repeat=3):
+    #     value += 1
+    # print(value)
+
+    # end = time.time()
+    # runtime = end - start
+    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
