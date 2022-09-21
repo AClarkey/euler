@@ -349,39 +349,73 @@ def problem_58(number: float) -> int:
 def problem_59(filename: str):
     """"""
 
-    with open(f"./data/{filename}", "r", encoding="UTF-8") as file:
-        input = file.read().split(",")
+    with open(f"./data/{filename}") as file:
+        input = file.read().strip().split(",")
 
-    for i in input[1:2]:
-        for y in string.ascii_lowercase:
+    cipher = [int(x) for x in input]
 
-            ascii_encrypt = int(i)
-            secret = ord(y)
-            value = ascii_encrypt ^ secret
-            print(ascii_encrypt, secret, chr(secret), value, chr(value))
+    def is_english_char(val1: int, val2: int) -> bool:
+        """check if XOR is a common English character"""
+        xor = val1 ^ val2
+        if 32 <= xor <= 123:
+            return True
+        return False
 
-            # print(ord(y))
-            # print(chr(int(i)))
+    key_letters = range(97, 123)
 
-    # original = 21
-    # password = "A"
+    first_letter = set()
+    for i in key_letters:
+        for y in range(0, len(cipher), 3):
+            first_letter.add(i)
+            if not is_english_char(cipher[y], i):
+                first_letter.remove(i)
+                break
 
-    # print(original ^ password)
-    # print(58 ^ password)
+    second_letter = set()
+    for i in key_letters:
+        for y in range(1, len(cipher), 3):
+            second_letter.add(i)
+            if not is_english_char(cipher[y], i):
+                second_letter.remove(i)
+                break
+    third_letter = set()
+    for i in key_letters:
+        for y in range(2, len(cipher), 3):
+            third_letter.add(i)
+            if not is_english_char(cipher[y], i):
+                third_letter.remove(i)
+                break
 
-    #  input[0:1] - not a d, x, y, z
-    #  input[1:2] - not a d, x, y, z
+    print(first_letter, second_letter, third_letter)
+
+    # length = len(input)
+    # counter = 0
+    # output = [] d/e, x/y, p/q
+
+    # for key in keys:
+    #     counter += 1
+    #     text = ""
+    #     # flag = True
+    #     if counter % 100 == 0:
+    #         print(counter)
+    #     for i, y in ((i, y) for i in range(0, length, 3) for y in range(3)):
+
+    #         cipherdigit = int(input[i + y])  # ASCII int of encrypted
+    #         keydigit = ord(key[y])  # ASCII of secret letter
+    #         plain = chr(cipherdigit ^ keydigit)  # XOR product
+    #         text += plain
+
+    #     print(text)
+    #     if text.count("message") >= 1:
+    #         output.append(text)
+
+    # print(output)
 
 
 if __name__ == "__main__":
     # start = time.time()
 
     answer = problem_59("p059_cipher.txt")
-
-    # value = 0
-    # for p in itertools.product(string.ascii_lowercase, repeat=3):
-    #     value += 1
-    # print(value)
 
     # end = time.time()
     # runtime = end - start
