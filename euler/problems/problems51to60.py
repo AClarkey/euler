@@ -346,77 +346,41 @@ def problem_58(number: float) -> int:
     return side
 
 
-def problem_59(filename: str):
-    """"""
+def problem_59(filename: str) -> int:
+    """
+    Decrypt the message and find the sum of the ASCII values in the original text.
+    """
 
     with open(f"./data/{filename}") as file:
         input = file.read().strip().split(",")
 
     cipher = [int(x) for x in input]
+    output = ""
+    keys = list(itertools.product(range(97, 123), repeat=3))
 
-    def is_english_char(val1: int, val2: int) -> bool:
-        """check if XOR is a common English character"""
-        xor = val1 ^ val2
-        if 32 <= xor <= 123:
-            return True
-        return False
+    for key in keys:
+        text = ""
+        for i, y in ((i, y) for i in range(0, len(cipher), 3) for y in range(3)):
+            cipherdigit = cipher[i + y]
+            keydigit = key[y]
+            plain = chr(cipherdigit ^ keydigit)
+            text += plain
 
-    key_letters = range(97, 123)
+        if text.count("the") >= 10:
+            output += text
 
-    first_letter = set()
-    for i in key_letters:
-        for y in range(0, len(cipher), 3):
-            first_letter.add(i)
-            if not is_english_char(cipher[y], i):
-                first_letter.remove(i)
-                break
+    value = 0
+    for i in output:
+        value += ord(i)
 
-    second_letter = set()
-    for i in key_letters:
-        for y in range(1, len(cipher), 3):
-            second_letter.add(i)
-            if not is_english_char(cipher[y], i):
-                second_letter.remove(i)
-                break
-    third_letter = set()
-    for i in key_letters:
-        for y in range(2, len(cipher), 3):
-            third_letter.add(i)
-            if not is_english_char(cipher[y], i):
-                third_letter.remove(i)
-                break
-
-    print(first_letter, second_letter, third_letter)
-
-    # length = len(input)
-    # counter = 0
-    # output = [] d/e, x/y, p/q
-
-    # for key in keys:
-    #     counter += 1
-    #     text = ""
-    #     # flag = True
-    #     if counter % 100 == 0:
-    #         print(counter)
-    #     for i, y in ((i, y) for i in range(0, length, 3) for y in range(3)):
-
-    #         cipherdigit = int(input[i + y])  # ASCII int of encrypted
-    #         keydigit = ord(key[y])  # ASCII of secret letter
-    #         plain = chr(cipherdigit ^ keydigit)  # XOR product
-    #         text += plain
-
-    #     print(text)
-    #     if text.count("message") >= 1:
-    #         output.append(text)
-
-    # print(output)
+    return value
 
 
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
     answer = problem_59("p059_cipher.txt")
 
-    # end = time.time()
-    # runtime = end - start
-    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
