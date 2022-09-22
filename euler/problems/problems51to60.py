@@ -378,10 +378,37 @@ def problem_59(filename: str, decrypt: list) -> int:
     return value
 
 
+def problem_60(number: int) -> int:
+    """
+    Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
+    """
+    length = 10 ** (number - 1)
+
+    primes = prime.eratosthenes_sieve_prime(length**2)
+    prime_num = [i for i in range(length) if primes[i]]
+    primes_list = [[i] for i in range(length) if primes[i]]
+
+    for i in primes_list:
+        for z in prime_num:
+            flag = True
+            for y in i:
+                if not primes[int(str(z) + str(y))] or not primes[int(str(y) + str(z))]:
+                    flag = False
+            if flag:
+                i.append(z)
+
+    output = []
+    for i in primes_list:
+        if len(i) == number:
+            output.append(sum(i))
+
+    return min(output)
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_59("p059_cipher.txt", [(ord("e"), ord("x"), ord("p"))])
+    answer = problem_60(4)
 
     end = time.time()
     runtime = end - start
