@@ -346,7 +346,7 @@ def problem_58(number: float) -> int:
     return side
 
 
-def problem_59(filename: str) -> int:
+def problem_59(filename: str, decrypt: list) -> int:
     """
     Decrypt the message and find the sum of the ASCII values in the original text.
     """
@@ -356,8 +356,10 @@ def problem_59(filename: str) -> int:
 
     cipher = [int(x) for x in input]
     output = ""
-    keys = list(itertools.product(range(97, 123), repeat=3))
-
+    if decrypt is None:
+        keys = list(itertools.product(range(97, 123), repeat=3))
+    else:
+        keys = decrypt
     for key in keys:
         text = ""
         for i, y in ((i, y) for i in range(0, len(cipher), 3) for y in range(3)):
@@ -379,7 +381,7 @@ def problem_59(filename: str) -> int:
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_59("p059_cipher.txt")
+    answer = problem_59("p059_cipher.txt", [(ord("e"), ord("x"), ord("p"))])
 
     end = time.time()
     runtime = end - start

@@ -59,3 +59,12 @@ def test_problem_58():
     actual = problems51to60.problem_58(0.2)
     expected_result = 309
     assert actual == expected_result
+
+
+def test_problem_59():
+    """testing test_problem_59"""
+    actual = problems51to60.problem_59(
+        "p059_cipher.txt", [(ord("e"), ord("x"), ord("p"))]
+    )
+    expected_result = 129448
+    assert actual == expected_result
