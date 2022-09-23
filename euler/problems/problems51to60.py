@@ -1,4 +1,4 @@
-"""Project Euler: Problems 41 to 50"""
+"""Project Euler: Problems 51 to 60"""
 import time
 import string
 import math

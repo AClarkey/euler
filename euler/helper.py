@@ -63,22 +63,34 @@ def triangle_numbers(num: int) -> int:
     return triangle
 
 
+def is_triangle_number(number: int) -> int:
+    """returns True if triangle number"""
+    return bool((math.sqrt(8 * number + 1) - 1) % 2 == 0)
+
+
+def is_square_number(number: int) -> int:
+    """returns True if square number"""
+    return bool(math.sqrt(number) % 1 == 0)
+
+
 def is_pentagonal_number(number: int) -> int:
     """returns True if pentagonal numbers"""
-
     return bool((math.sqrt(24 * number + 1) + 1) % 6 == 0)
-
-
-def is_triangle_number(number: int) -> int:
-    """returns True if triangle numbers"""
-
-    return bool((math.sqrt(8 * number + 1) - 1) % 2 == 0)
 
 
 def is_hexagonal_number(number: int) -> int:
     """returns True if hexagonal numbers"""
-
     return bool((math.sqrt(8 * number + 1) + 1) % 4 == 0)
+
+
+def is_heptagonal_number(number: int) -> int:
+    """returns True if heptagonal numbers"""
+    return bool((math.sqrt(40 * number + 9) + 3) % 10 == 0)
+
+
+def is_octagonal_number(number: int) -> int:
+    """returns True if octagonal numbers"""
+    return bool((math.sqrt(3 * number + 1) + 1) % 3 == 0)
 
 
 if __name__ == "__main__":
