@@ -42,43 +42,61 @@ def test_triangle_numbers():
     assert actual == expected
 
 
-def test_is_triangle_number():
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(21, True), (28, True), (36, True), (42, False)],
+)
+def test_is_triangle_number(input, expected_result):
     """test of triangle"""
-    actual = helper.is_triangle_number(40755)
-    expected = True
-    assert actual == expected
+    actual = helper.is_triangle_number(input)
+    assert actual == expected_result
 
 
-def test_is_square_number():
-    """test of triangle"""
-    actual = helper.is_square_number(25)
-    expected = True
-    assert actual == expected
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(4, True), (81, True), (1600, True), (27, False)],
+)
+def test_is_square_number(input, expected_result):
+    """test of squares"""
+    actual = helper.is_square_number(input)
+    assert actual == expected_result
 
 
-def test_is_pentagonal_number():
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(287, True), (330, True), (376, True), (300, False)],
+)
+def test_is_pentagonal_number(input, expected_result):
     """test of pentagonal"""
-    actual = helper.is_pentagonal_number(40755)
-    expected = True
-    assert actual == expected
+    actual = helper.is_pentagonal_number(input)
+    assert actual == expected_result
 
 
-def test_is_hexagonal_number():
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(120, True), (153, True), (190, True), (200, False)],
+)
+def test_is_hexagonal_number(input, expected_result):
     """test of hexagonal"""
-    actual = helper.is_hexagonal_number(40755)
-    expected = True
-    assert actual == expected
+    actual = helper.is_hexagonal_number(input)
+    assert actual == expected_result
 
 
-def test_is_heptagonal_number():
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(286, True), (342, True), (403, True), (400, False)],
+)
+def test_is_heptagonal_number(input, expected_result):
     """test of hexagonal"""
-    actual = helper.is_heptagonal_number(55)
-    expected = True
-    assert actual == expected
+    actual = helper.is_heptagonal_number(input)
+    assert actual == expected_result
 
 
-def test_is_octagonal_number():
+@pytest.mark.parametrize(
+    "input, expected_result",
+    [(560, True), (645, True), (736, True), (700, False)],
+)
+def test_is_octagonal_number(input, expected_result):
     """test of hexagonal"""
-    actual = helper.is_octagonal_number(65)
-    expected = True
-    assert actual == expected
+    actual = helper.is_octagonal_number(input)
+    assert actual == expected_result
