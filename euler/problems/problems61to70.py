@@ -100,11 +100,24 @@ def problem_61() -> int:
     return results
 
 
+def problem_62() -> int:
+    """
+    Find the smallest cube for which exactly five permutations of its digits are cube.
+    """
+
+    for i in range(500):
+        cube = i**3
+        digits = [int(d) for d in str(cube)]
+        perms = list(itertools.permutations(digits))
+
+        print(len(perms))
+
+
 if __name__ == "__main__":
-    start = time.time()
+    # start = time.time()
 
-    answer = problem_61()
+    answer = problem_62()
 
-    end = time.time()
-    runtime = end - start
-    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    # end = time.time()
+    # runtime = end - start
+    # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
