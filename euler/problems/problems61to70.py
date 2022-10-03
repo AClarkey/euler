@@ -14,7 +14,7 @@ from tkinter.filedialog import test
 from euler import helper, prime
 
 
-def problem_61(number: int) -> int:
+def problem_61() -> int:
     """
     Find the sum of the only ordered set of six cyclic 4-digit numbers for
     which each polygonal type: triangle, square, pentagonal, hexagonal,
@@ -36,7 +36,6 @@ def problem_61(number: int) -> int:
         if helper.is_octagonal_number(i):
             numbers.add(i)
 
-    # print(len(numbers), sorted(numbers))
     output = []
 
     for i in numbers:
@@ -64,23 +63,48 @@ def problem_61(number: int) -> int:
         if last_digit in numbers:
             output.append(int(str(i) + str(last_digit)))
 
+    def is_type(var, lists) -> list:
+        if helper.is_triangle_number(var):
+            lists[0] += 1
+        if helper.is_square_number(var):
+            lists[1] += 1
+        if helper.is_pentagonal_number(var):
+            lists[2] += 1
+        if helper.is_hexagonal_number(var):
+            lists[3] += 1
+        if helper.is_heptagonal_number(var):
+            lists[4] += 1
+        if helper.is_octagonal_number(var):
+            lists[5] += 1
+        return lists
+
+    results = set()
+
     for var in output:
-        numbers = []
+        final = []
+        check = [0, 0, 0, 0, 0, 0]
+        sum = 0
         for i in range(0, 24, 4):
-            numbers.append(str(var)[i : i + 4])
-        if len(list(set(numbers))) == 6:
-            print(numbers)
-        else:
+            digit = str(var)[i : i + 4]
+            final.append(digit)
+            sum += int(digit)
+        if len(list(set(final))) != 6:
             output.remove(var)
 
-        for y in numbers: 
+        for y in final:
+            check = is_type(int(y), check)
+
+        if check.count(0) == 0:
+            results.add(sum)
+
+    return results
 
 
 if __name__ == "__main__":
-    # start = time.time()
+    start = time.time()
 
-    answer = problem_61(10)
+    answer = problem_61()
 
-    # end = time.time()
-    # runtime = end - start
-    # # print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
+    end = time.time()
+    runtime = end - start
+    print(f"Answer: {answer}, Runtime: {'%.3f' % runtime} seconds")
