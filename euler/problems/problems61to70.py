@@ -1,14 +1,9 @@
 """Project Euler: Problems 61 to 70"""
-from re import I
 import time
 import string
 import math
 import itertools
 import copy
-
-import statistics
-from statistics import mode
-from tkinter.filedialog import test
 
 
 from euler import helper, prime
@@ -105,17 +100,19 @@ def problem_62(num: int) -> int:
     Find the smallest cube for which exactly five permutations of its digits are cube.
     """
 
-    d = {}
+    output = {}
+
     for i in range(10000):
-        c = i**3
-        d.setdefault("".join(sorted(str(c))), set()).add(c)
-    return min(sorted(v) for v in d.values() if len(v) == num)[0]
+        cube = i**3
+        output.setdefault("".join(sorted(str(cube))), set()).add(cube)
+
+    return min(sorted(v) for v in output.values() if len(v) == num)[0]
 
 
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_62(3)
+    answer = problem_62(5)
 
     end = time.time()
     runtime = end - start
