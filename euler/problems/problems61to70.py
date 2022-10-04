@@ -109,10 +109,25 @@ def problem_62(num: int) -> int:
     return min(sorted(v) for v in output.values() if len(v) == num)[0]
 
 
+def problem_63() -> int:
+    """
+    The 5-digit number, 16807=7**5, is also a fifth power. Similarly, the 9-digit number, 134217728=8**9, is a ninth power.
+
+    How many n-digit positive integers exist which are also an nth power?
+    """
+    counter = 0
+    for base in range(1, 10):
+        for exp in range(1, 22):
+            value = base**exp
+            if len(str(value)) == exp:
+                counter += 1
+    return counter
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_62(5)
+    answer = problem_63()
 
     end = time.time()
     runtime = end - start
