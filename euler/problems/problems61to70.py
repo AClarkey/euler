@@ -4,6 +4,8 @@ import string
 import math
 import itertools
 import copy
+import decimal
+import re
 
 
 from euler import helper, prime
@@ -124,10 +126,81 @@ def problem_63() -> int:
     return counter
 
 
+def problem_64(num: int) -> int:
+    """
+    Exactly four continued fractions, for N <= 13, have an odd period.
+    How many continued fractions for N <= 10,000 have an odd period?
+
+    Struggled, credit to: https://radiusofcircle.blogspot.com/2016/11/project-euler-problem-64-solution-with-python.html
+    """
+
+    def cont_fraction(n):
+
+        mn = 0.0
+        dn = 1.0
+        a0 = int(math.sqrt(n))
+        an = int(math.sqrt(n))
+        period = 0
+
+        if a0 != (math.sqrt(n)):
+            while an != 2 * a0:
+
+                # print(
+                #     f"n: {n}, a0: {a0}, mn: {mn}, dn: {dn}, an: {an}, period: {period}"
+                # )
+
+                mn = dn * an - mn
+                dn = (n - mn**2) / dn
+                an = int((a0 + mn) / dn)
+                period += 1
+
+        # print(f"n: {n}, a0: {a0}, mn: {mn}, dn: {dn}, an: {an}, period: {period}")
+        return period
+
+    counter = 0
+    for i in range(2, num):
+
+        if cont_fraction(i) % 2 == 1:
+            counter += 1
+
+    return counter
+
+
+def problem_65(num: int) -> int:
+    """
+    Find the sum of digits in the numerator of the 100th convergent of the continued fraction for .
+    """
+
+    def cont_fraction(n):
+
+        mn = 0.0
+        dn = 1.0
+        a0 = int(math.sqrt(n))
+        an = int(math.sqrt(n))
+        period = 0
+
+        if a0 != (math.sqrt(n)):
+            while an != 2 * a0:
+
+                print(
+                    f"n: {n}, a0: {a0}, mn: {mn}, dn: {dn}, an: {an}, period: {period}"
+                )
+
+                mn = dn * an - mn
+                dn = (n - mn**2) / dn
+                an = int((a0 + mn) / dn)
+                period += 1
+
+        print(f"n: {n}, a0: {a0}, mn: {mn}, dn: {dn}, an: {an}, period: {period}")
+        return period
+
+    print(2 + 1 / (1 + 1 / (2)))
+
+
 if __name__ == "__main__":
     start = time.time()
 
-    answer = problem_63()
+    answer = problem_65(10)
 
     end = time.time()
     runtime = end - start
